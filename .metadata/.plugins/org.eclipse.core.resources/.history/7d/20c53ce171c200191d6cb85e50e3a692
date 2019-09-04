@@ -1,0 +1,50 @@
+package com.OBSERVAMonitor;
+
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.Test;
+
+import junit.framework.Assert;
+
+public class OBSERVAInputPage extends BaseTest {
+	
+	
+@Test (priority = 2)
+	
+	public void InputPage() throws InterruptedException
+	{
+		
+		InputPage IP = PageFactory.initElements(driver, InputPage.class);
+		
+		IP.INPUT();
+		
+		IP.PageTitle();
+		
+		
+		IP.bulletlist();
+		/*Actions act = new Actions(driver);
+		act.click();
+		Thread.sleep(1000);*/
+		//Thread.sleep(1000);
+		
+		IP.SwitchingFrame().click();
+		Thread.sleep(1000);
+		
+		
+		IP.btnToAddInput();
+		Thread.sleep(1000);
+		
+		
+		//IP.hdrAddInputs();
+		
+	
+		
+		
+			
+		
+		//IP.HdrAddInputs();
+	
+	
+	
+
+}}

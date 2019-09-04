@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="OBSERVAMonitor">
+<test name="Smoke Test">
+<groups>
+<run>
+<include name="Smoke Test"/>
+<include name="Regression Test"/>
+</run>
+</groups>
+<classes>
+<class name="com.OBSERVAMonitor.OBSERVADashboardPage"/>
+<methods>
+<include name="OBSERVADashboardPage.DashboardPage"/>
+<include name="OBSERVADashboardPage.DashboardPageFooter"/>
+</methods>
+</class>
+<class name="com.OBSERVAMonitor.OBSERVAInputPage"/>
+<methods>
+<include name="OBSERVAInputPage.InputPage"/>
+</methods>
+</class>
+</classes>
+</test>
+</suite>
+
+
+
+ <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "testng.org/testng-1.0.dtd">; 
+<suite name="testone"> 
+<test name="test"> 
+<classes> 
+   <class name="sampleProj.ToolQA1">
+   <methods> 
+   <exclude name="test1"/> 
+   </methods> 
+   </class> 
+   <class name="sampleProj.ToolQA2" /> 
+</classes> 
+</test> 
+</suite>
+This should be the format

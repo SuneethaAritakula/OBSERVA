@@ -1,0 +1,51 @@
+package com.OBSERVAMonitor;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+
+public class InputPage {
+	
+	@FindBy(xpath = "/html/body/div/div[1]/div[2]/ul/li[2]/a/p")
+	WebElement INPUT;
+	public void INPUT()
+	
+	{
+	 INPUT.click();
+
+	}
+	
+	@FindBy(xpath = "/html/body/div/div[2]/nav/div/div[1]/a")
+	WebElement PageTitle;
+	public void PageTitle() {
+		
+		String pagetitle = PageTitle.getText();
+		Assert.assertEquals(pagetitle, "INPUTS BEING MONITORED");
+	}
+	
+	
+	
+	@FindBy (xpath = "//*[@id=\"minimizeSidebar\"]/i[2]")
+	WebElement bulletlist;
+	public void bulletlist()
+	
+	{
+		bulletlist.click();
+		
+	}
+	
+	//driver.findElement(By.cssSelector(btnMenu)).click();
+    //Assert.assertEquals(driver.findElement(By.cssSelector(TitleResultPage)).getText(), Text);
+    
+    //body > div > div.main-panel.ps-container.ps-theme-default.ps-active-y > div.content > div:nth-child(1) > div > button > i
+    //xpath = "/html/body/div/div[2]/div[4]/div[1]/div/button/i"
+	
+	@FindBy(css="//body > div > div.main-panel.ps-container.ps-theme-default.ps-active-y > div.content > div:nth-child(1) > div > button > i")
+	WebElement btnToAddInput;
+	public void btnToAddInput()
+	
+	{
+		
+		btnToAddInput.click();	
+	}
+}

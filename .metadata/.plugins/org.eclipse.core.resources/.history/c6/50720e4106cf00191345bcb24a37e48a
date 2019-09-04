@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="OBSERVAMonitor">
+<test name="Test">
+<groups>
+<run>
+<include name="Smoke Test"/>
+<include name="Regression Test"/>
+</run>
+</groups>
+<classes>
+<class name="com.OBSERVAMonitor.OBSERVADashboardPage"/>
+<methods>
+<include name="DashboardPage"/>
+<include name="DashboardPageFooter"/>
+</methods>
+</classes>
+<class name="com.OBSERVAMonitor.OBSERVAInputPage"/>
+<method>
+<include name="InputPage"/>
+</method>
+</class>
+</classes>
+</test>
+</suite>

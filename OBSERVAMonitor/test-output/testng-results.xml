@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="31681" started-at="2019-09-04T12:13:52Z" finished-at="2019-09-04T12:14:24Z">
+    <groups>
+      <group name="Regression Test">
+        <method signature="OBSERVAInputPage.InputPage()[pri:0, instance:com.OBSERVAMonitor.OBSERVAInputPage@5bcab519]" name="InputPage" class="com.OBSERVAMonitor.OBSERVAInputPage"/>
+      </group> <!-- Regression Test -->
+    </groups>
+    <test name="Default test" duration-ms="31681" started-at="2019-09-04T12:13:52Z" finished-at="2019-09-04T12:14:24Z">
+      <class name="com.OBSERVAMonitor.OBSERVAInputPage">
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.OBSERVAMonitor.OBSERVAInputPage@5bcab519]" name="setup" is-config="true" duration-ms="20432" started-at="2019-09-04T12:13:52Z" finished-at="2019-09-04T12:14:13Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="InputPage()[pri:0, instance:com.OBSERVAMonitor.OBSERVAInputPage@5bcab519]" name="InputPage" duration-ms="11217" started-at="2019-09-04T12:14:13Z" finished-at="2019-09-04T12:14:24Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- InputPage -->
+      </class> <!-- com.OBSERVAMonitor.OBSERVAInputPage -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

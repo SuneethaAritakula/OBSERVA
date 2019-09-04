@@ -1,0 +1,76 @@
+package com.OBSERVAMonitor;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
+
+import junit.framework.Assert;
+
+public class OBSERVAInputPage extends BaseTest {
+	
+	
+@Test (priority = 2)
+	
+	public void InputPage() throws InterruptedException, IOException
+	{
+		
+		InputPage IP = PageFactory.initElements(driver, InputPage.class);
+		
+		IP.INPUT();
+		
+		IP.PageTitle();
+		
+		
+		IP.bulletlist();
+		/*Actions act = new Actions(driver);
+		act.click();
+		Thread.sleep(1000);*/
+		//Thread.sleep(1000);
+		
+		IP.SwitchingFrame().click();
+		Thread.sleep(1000);
+		
+		
+		IP.btnToAddInput();
+		Thread.sleep(1000);
+		
+		
+		IP.SelectInputsFromDropDown();
+		
+		//*[@id="select_sourceType"]
+		
+		IP.SelectInputs();
+
+		Select Input = new Select(driver.findElement(By.xpath("//*[@id=\'select_sourceType\']")));
+		Input.selectByIndex(0);
+		
+		/*for (int i = 0; i<=5; i++)
+			
+		{
+			CommonMethods.readandwritedata(driver, "");
+			
+			
+		}
+		//Input.selectByVisibleText("FEP");*/
+		//Thread.sleep(500);*/
+		
+		IP.EDIInput();
+		
+		IP.txtError();
+		String expectedText = "Error!ETI Source E:224.1.0.46:10046 already exists";
+		String actualText = driver.getWindowHandle();
+		Assert.assertEquals(expectedText, actualText);
+		
+		
+		
+	
+	    
+		
+	
+
+}}

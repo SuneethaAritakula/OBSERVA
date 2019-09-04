@@ -1,0 +1,27 @@
+<suite name="OBSERVAMonitor">
+<test name="DashboardPage">
+
+<classes>
+<class name="com.OBSERVAMonitor.DashboardPage"></class>
+<methods>
+<include name="BulletList"/>
+<include name="INPUT"/>
+</methods>
+ </classes>
+ 
+
+<class name = "com.OBSERVAMonitor.InputPage"></class>
+<methods>
+<include name="INPUT"/>
+<include name="PageTitle"/>
+<include name="BulletList"/>
+<include name="SwitchingFrame"/>
+<include name="btnToAddInput"/>
+</methods>
+ </classes>
+ </test>
+ </suite>
+
+
+
+

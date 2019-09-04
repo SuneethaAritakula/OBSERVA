@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="OBSERVAMonitor">
+<test name = "OBSERVAMonitor">
+<groups>
+<run>
+<include name="Smoke Test"/>
+<include name="Regression Test"/>
+</run>
+</groups>
+<classes>
+<class name="com.OBSERVAMonitor.OBSERVADashboardPage"/>
+<include method name="DashboardPage"/>
+<include method name="DashboardPageFooter"/>
+</class>
+<class name="com.OBSERVAMonitor.OBSERVAInputPage"/>
+<include method="InputPage"/>
+</classes>
+</test>
+</suite>
+
+
+
+ 

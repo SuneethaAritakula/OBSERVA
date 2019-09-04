@@ -1,0 +1,159 @@
+package com.OBSERVAMonitor;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.swing.Action;
+
+import org.apache.poi.Version;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+
+
+public class DashboardPage extends BaseTest{
+	
+	
+	
+	
+		
+	@FindBy (xpath = "//*[@id=\"minimizeSidebar\"]/i[2]")
+	WebElement bulletlist;
+	
+	@Test(priority =0)
+	
+	public void bulletlist()
+	
+	{
+		bulletlist.click();
+		}
+	
+
+		
+	@FindBy(xpath = "/html/body/div/div[1]/div[2]/ul/li[2]/a/p")
+	WebElement INPUT;
+	
+	@Test(priority= 1)
+	public void INPUT()
+	
+	{
+	 INPUT.click();
+
+	}
+	
+	@FindBy(xpath = "/html/body/div/div[1]/div[2]/ul/li[3]/a/p")
+	WebElement CONTINUITY;
+	
+	@Test(enabled = false)
+	
+	public void CONTINUITY ()
+	
+	{
+	CONTINUITY.click();	
+	    
+	}
+	
+	@FindBy(xpath = "/html/body/div/div[1]/div[2]/ul/li[4]/a/p")
+	WebElement CONTENT;
+	
+	
+	public void CONTENT()
+	
+	{
+		CONTENT.click();
+	}
+	
+   @FindBy(xpath= "/html/body/div/div[1]/div[2]/ul/li[5]/a/p")
+   WebElement SILENCE;
+   public void SILENCE()
+   
+   {
+	   SILENCE.click();
+   }
+   
+   @FindBy (xpath = "/html/body/div/div[1]/div[2]/ul/li[6]/a/p")
+   WebElement EDIOUTPUT;
+   public void EDIOUTPUT()
+   
+   {
+
+	   EDIOUTPUT.click();
+   }
+   
+   @FindBy(xpath = "/html/body/div/div[1]/div[2]/ul/li[7]/a/p")
+   WebElement RECONFIGURATION;
+   public void RECONFIGURATION()
+   
+   {
+	   RECONFIGURATION.click();
+   }
+   
+  @FindBy(xpath = "//*[@id=\'Version\']")
+   WebElement VERSION;
+  
+  public void VERSION(){
+   
+	 String versionnumber = VERSION.getText();
+	 Assert.assertEquals(versionnumber, "VERSION 1.4.1.40");
+			   
+   }
+     
+      
+	@FindBy(xpath="/html/body/div/div[2]/footer/div/nav/ul/li/a")
+	WebElement ABOUTUS;
+    public void ABOUTUS() {
+		
+	
+	ABOUTUS.click();
+    }
+
+	
+	@FindBy (xpath = "//*[@id='copyright']")
+	WebElement Copyright;
+	
+	public void Copyright() {
+		//return Copyright.getText();
+		
+	String copyrightversion = Copyright.getText();
+	Assert.assertEquals(copyrightversion, "© 2019 Factum Radioscape.");
+		
+	}}
+	
+	
+	
+	
+	
+			
+
+
+   
+	
+	
+	
+	
+	
+	
+		
+	
+	
+	
+	
+
+
+
+
+
+		
+		
+	
+		
+	
+		
+	
+
+	

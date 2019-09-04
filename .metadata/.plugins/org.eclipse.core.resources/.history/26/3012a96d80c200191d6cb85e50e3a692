@@ -1,0 +1,88 @@
+package com.OBSERVAMonitor;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+
+public class InputPage {
+	
+	///html/body/div/div[1]/div[2]/ul/li[2]/a/p
+	
+	@FindBy(xpath = "/html/body/div/div[1]/div[2]/ul/li[2]/a/p")
+	WebElement INPUT;
+	
+	public void INPUT()
+	
+	{
+	 INPUT.click();
+
+	}
+	
+	@FindBy(xpath = "/html/body/div/div[2]/nav/div/div[1]/a")
+	WebElement PageTitle;
+	public void PageTitle() {
+		
+		String pagetitle = PageTitle.getText();
+		Assert.assertEquals(pagetitle, "INPUTS BEING MONITORED");
+	}
+	
+	
+	
+	@FindBy (xpath = "//*[@id=\"minimizeSidebar\"]/i[2]")
+	WebElement bulletlist;
+	public void bulletlist()
+	
+	{
+		bulletlist.click();
+		
+	}
+	
+
+	@FindBy(xpath = "/html/body/div/div[2]/div[4]")
+	WebElement SwitchingFrame;
+	public WebElement SwitchingFrame() {
+		
+	return SwitchingFrame.findElement(By.xpath("/html/body/div/div[2]/div[4]"));
+		
+		
+	}
+	
+	@FindBy(xpath = "/html/body/div/div[2]/div[4]/div[1]/div/button/i")
+	WebElement btnToAddInput;
+	public void btnToAddInput()
+	
+	{
+		
+		btnToAddInput.click();	
+	}
+	
+	
+	//*[@id="addSourceModal"]/div/div/div[2]/form/div[1]/div
+	@FindBy(xpath = "//*[@id='addSourceModal']/div/div/div[2]/form/div[1]/div")
+	WebElement SelectInputsFromDropDown;
+	
+	public void SelectInputsFromDropDown()
+	
+	{	
+		SelectInputsFromDropDown.click();
+}
+	
+	public void SelectFEP() {
+		
+		Select Input =new Select(driver.findElement(By.id("status")));
+	     stat.selectByVisibleText("active");
+		
+	}
+}
+	
+	
+	
+	
+	
+	
+	
+	
+

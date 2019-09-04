@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="OBSERVAMonitor" verbose="1">
+<test name = "testNG Test">
+<groups>
+<run>
+<include name="Smoke Test"/>
+<include name = "Regression Test"/>
+<include name = "{"Smoke Test" "Regression Test"}"/>
+</run>
+</groups>
+<classes>
+<class name="com.OBSERVAMonitor.DashboardPage"/>
+<class name = "com.OBSERVAMonitor.InputPage"/>
+</classes>
+</test>
+</suite>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Sample Suite" verbose="1" >
+  <test name="Unit Level Test" >
+    <classes>
+       <class name=”com.easy.entry.AddTestCase" />
+<class name=”com.easy.entry.EditTestCase" />
+    </classes>
+  </test>
+  <test name="Regression Test">
+    <classes>
+      <class name=”com.easy.records.AddUserTestCase" />
+<class name=”com.easy.records.DeleteUserTestCase" />
+    </classes>
+  </test>
+</suite>

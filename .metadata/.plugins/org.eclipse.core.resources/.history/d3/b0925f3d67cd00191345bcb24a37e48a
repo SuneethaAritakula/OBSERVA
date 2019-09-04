@@ -1,0 +1,10 @@
+<suite name="OBSERVAMonitor">
+<test name="DashboardPage">
+<test name = "InputPage">
+<classes>
+<class name="com.OBSERVAMonitor.OBSERVADashboardPage"></class>
+<class name = "com.OBSERVAMonitor.InputPage"></class>
+ </classes>
+ </test>
+ </suite>
+
