@@ -1,0 +1,413 @@
+package com.OBSERVAMonitor;
+
+import java.awt.Color;
+import java.awt.RenderingHints.Key;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+
+@Test
+public class SilencePage {
+	
+	String Red = "rgba(255, 54, 54, 1)";
+	String Orange = "rgba(255, 178, 54, 1)";
+	String Green = "rgba(24, 206, 15, 1)";
+	String Black = "rgba(44, 44, 44, 1)";
+
+	
+	@FindBy(xpath = " //*[text()='Silence']")
+	WebElement lnkSilence;
+	
+	//@FindBy(xpath = ""//*[@id="headingTwo"]/a/i[2])
+
+	//@FindBy(id = "overall-state-0")
+	//WebElement EDIHeartSymbolBackgroundColour;
+	
+	//@FindBy(id = "overall-state-1")
+	//WebElement EDIHeartSymbolColour;
+	
+	//@FindBy(xpath = "//*[@id=\'headingOne\']/a/i[2]")
+	//WebElement AudioCollapse;
+	
+	//@FindBy(xpath= "//*[@id=\'headingTwo\']/a/i[2]")
+	//WebElement PADCollpase;
+	
+	//@FindBy(xpath = "//*[@id=\"data-overall-0\"]")
+	//WebElement DATACollapse;
+	
+	
+	public void SilencePage() {
+		
+	lnkSilence.click();
+	//new SilencePage().AudioSubComponentsColors(driver);
+	}
+	
+		//AudioCollapse.click();
+		//PADCollpase.click();
+		//DATACollapse.click();
+		
+	
+	    /*@FindBy(xpath = "//*[@class= 'card-title']")
+	    WebElement InputTitle;
+	    
+	
+	    @FindBy(id = "overall-state-1")
+	    WebElement OVerallInputAlarm;	
+	
+		@FindBy(id = "audio-overall-0")
+		WebElement OverallAudioButtonColour;
+		
+		@FindBy(id = "pad-overall-0")
+		WebElement OverallPADButtonColour;
+		
+		@FindBy(id="data-overall-0")
+		WebElement OverallDataButtonColour;
+		
+		//@FindBy(xpath = "//*[@class= 'card-body'] ")
+		//WebElement SwitchingFrame;*/
+		
+		
+		public void OverallInputAlarms(WebDriver driver) throws InterruptedException {
+			
+			String Alarmcolor = null;
+			
+			//SwitchingFrame.click();
+		
+			 List<WebElement> Title = driver.findElements(By.xpath("//*[@class= 'card-title']"));
+			 
+			 System.out.println("Total Inputs on Silence page:"+Title.size());
+			 
+			 
+			 int Titlesize = Title.size();
+			 
+			 for(int i = 0;i<=Titlesize;i++)
+				
+			{
+				 //if (i<Titlesize-1) 
+					//{
+				 
+			String TitleName =  Title.get(i).getText();
+			System.out.println(TitleName); 
+			
+			
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", Title.get(i+1));
+			
+            			
+			String strHeart = driver.findElement(By.id("overall-state-"+i)).getAttribute("class");
+			
+			//System.out.println(strHeart);
+			
+			if (strHeart.contains("danger")) 
+			{
+				System.out.println("Overall alarm status - Red");
+				Alarmcolor = "Red";
+			
+			}else if(strHeart.contains("warning")) {
+				
+				System.out.println("Overall alarm status - Orange");
+				Alarmcolor = "Orange";
+		
+			}
+			
+			else if(strHeart.contains("success")) 
+			{
+				
+				System.out.println("Overall alarm status - Green");
+				Alarmcolor = "Green";
+				
+            }
+			else if (strHeart.contains("default")) 
+			{
+				
+				System.out.println("Overall alarm status - Black");
+				Alarmcolor = "Black";
+			}
+       //calling common method
+			
+			
+					
+			SilencePage s =new SilencePage();
+			/*String AlarmComponentsColor = s.verifySilenceAlarmComponents(driver, i);
+			if (Alarmcolor.equalsIgnoreCase(AlarmComponentsColor))
+					
+					{
+				System.out.println(TitleName+  " "+"status "+Alarmcolor +" - Pass");
+					}
+			
+			else {
+				
+				System.out.println(TitleName+  " "+"status "+Alarmcolor +" - Fail");
+			}*/
+			
+			
+			
+			
+			
+			if (i<Titlesize-1) 
+			{
+				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", Title.get(i+1));
+				//JavascriptExecutor js = ((JavascriptExecutor) driver);
+				//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", Title.get(i+1));
+	
+				//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(0,-250);");
+				
+				
+				
+			}}}
+			
+			/*@FindBy(xpath = "//*[@class= 'card-title'][text()='EDI 1 -']")
+		    WebElement InputTitle;
+		    		     
+		    @FindBy(xpath = "//*[@id=\'overall-state-1\']")
+		    WebElement EDI1OverallAlarm;	
+		
+			@FindBy(xpath = "//*[@id='audio-overall-1']")
+			WebElement EDI1OverallAudioAlarm;
+			
+			@FindBy(xpath = "//*[@id='pad-overall-1']")
+			WebElement EDI1OverallPADAlarm;
+			
+			@FindBy(xpath = "//*[@id='data-overall-1']")
+			WebElement EDI1OverallDataAlarm;
+			
+			public void EDI1OverallAlarm(){
+						
+					
+			String actualEDITitle = InputTitle.getText();
+		    String expectedTitle = "EDI 1 -E:224.1.0.46:10046";
+		       
+		    Assert.assertEquals(actualEDITitle,expectedTitle);
+		    System.out.println(actualEDITitle);
+			
+			String color1 = EDI1OverallAudioAlarm.getCssValue("color").trim();//green
+			String color2 = EDI1OverallPADAlarm.getCssValue("color").trim();//red
+			String color3 = EDI1OverallDataAlarm.getCssValue("color").trim();//orange
+			System.out.println(color1+color2+color3);
+			
+			Assert.assertEquals(color1,"rgba(24, 206, 15, 1)");
+			Assert.assertEquals(color2,"rgba(255, 54, 54, 1)");
+			Assert.assertEquals(color3,"rgba(24, 206, 15, 1)");
+						
+			String x = "color1";
+			String y = "color2";
+			String z  = "color3";	
+			
+			String Red = "rgba(255, 54, 54, 1)";
+			String Orange = "rgba(255, 178, 54, 1)";
+			String Green = "rgba(24, 206, 15, 1)";
+
+		
+					String xy = Green+" "+Red+" "+Orange;
+					if(xy.contains(Red)) {
+						System.out.println("Overall EDI 1 alarm is Red");
+					}
+					else {
+						if(xy.contains(Orange)) {
+							System.out.println("overall EDI 1 alarm is Orange");
+						}
+						else {
+							System.out.println("overall EDI1 alarm is Green");
+						}}}
+			
+			@FindBy(xpath = "//*[@class= 'card-title'][text()='12B -']")
+		    WebElement RFInputTitle;
+		    		     
+		    @FindBy(xpath = "//*[@id=\'overall-state-0\']")
+		    WebElement RFOverallAlarm;	
+		
+			@FindBy(xpath = "//*[@id='audio-overall-0']")
+			WebElement RFOverallAudioAlarm;
+			
+			@FindBy(xpath = "//*[@id='pad-overall-0']")
+			WebElement RFOverallPADAlarm;
+			
+			@FindBy(xpath = "//*[@id='data-overall-0']")
+			WebElement RFOverallDataAlarm;
+		
+
+public void RFInputOverallAlarm() {
+	
+	String actualRFTitle = RFInputTitle.getText();
+    String expectedTitle = "12B -M:0";
+       
+    Assert.assertEquals(actualRFTitle,expectedTitle);
+    System.out.println(actualRFTitle);
+	
+	String color1 = RFOverallAudioAlarm.getCssValue("color").trim();//green
+	String color2 = RFOverallPADAlarm.getCssValue("color").trim();//green
+	String color3 = RFOverallDataAlarm.getCssValue("color").trim();//green
+	System.out.println(color1+color2+color3);
+				
+	String x = "color1";
+	String y = "color2";
+	String z  = "color3";	
+	
+	String Red = "rgba(255, 54, 54, 1)";
+	String Orange = "rgba(255, 178, 54, 1)";
+	String Green = "rgba(24, 206, 15, 1)";
+
+
+			String xy = Green+" "+Red+" "+Orange;
+			if(xy.contains(Red)) {
+				System.out.println("Overall RF alarm is Red");
+			}
+			else {
+				if(xy.contains(Orange)) {
+					System.out.println("overall RF alarm is Orange");
+				}
+				else {
+					System.out.println("overall RF alarm is Green");
+				}}}
+	
+	
+	}*/
+	public String verifySilenceAlarmComponents(WebDriver driver, int index)
+	
+	
+	{
+		
+		String Red = "rgba(255, 54, 54, 1)";
+		String Orange = "rgba(255, 178, 54, 1)";
+		String Green = "rgba(24, 206, 15, 1)";
+		String Grey = "rgba(136, 136, 136, 1)";
+		
+		
+		
+		String AudioAlarm1 = driver.findElements(By.xpath("//*[starts-with(@id,'audio-overall-')]")).get(index).getCssValue("color").trim();
+		System.out.println("Audio Alarm "+(index+1)+" is: "+AudioAlarm1);
+		
+				
+		String PADAlarm1 = driver.findElements(By.xpath("//*[starts-with(@id,'pad-overall-')]")).get(index).getCssValue("color").trim();
+		System.out.println("PAD Alarm "+(index+1)+" is: "+PADAlarm1);
+		
+		
+		String DATAAlarm1 = driver.findElements(By.xpath("//*[starts-with(@id,'data-overall-')]")).get(index).getCssValue("color").trim();
+		System.out.println("DATA Alarm "+(index+1)+" is: "+DATAAlarm1);
+		return DATAAlarm1;}
+		
+
+	
+	
+		
+		
+		/*String strHeart = driver.findElement(By.id("overall-state-"+i)).getCssValue("color").trim();
+			
+			//System.out.println(strHeart);
+			
+			if (strHeart.contains("rgba(255, 54, 54, 1)")) 
+			{
+				System.out.println("alarm is in Red");
+				
+			
+			}else if(strHeart.contains("rgba(255, 178, 54, 1)")) {
+				
+				System.out.println("alarm is in Orange");
+			
+		
+			}else if(strHeart.contains("rgba(24, 206, 15, 1)")) {
+				
+				System.out.println("alarm is in Green");
+			}
+				
+				else if(strHeart.contains("rgba(136, 136, 136, 1)")) {
+					
+					System.out.println("alarm is in Grey");
+				}}}*/
+			
+			
+		
+	
+	//22/09/19 - trying to find individual left & right alarms
+	
+public void AudioSubComponentsColors(WebDriver driver, int index) throws InterruptedException
+	{
+	
+	
+	//List<WebElement> abc =driver.findElements(By.xpath("//div[@class='col-md-2'][1]")); 
+	//List<WebElement> abc =driver.findElements(By.xpath("//div[@class='col-md-2'][1]"));
+	
+	//List<WebElement> abc =driver.findElements(By.xpath("//*[@class='col-md-2'][1]//*[contains(@class ,'fa fa-circle fa-fw icon')]"));
+	
+	// 24/09/2019 - capturing individual alarms for PAD & MOT
+	//List<WebElement> abc =driver.findElements(By.xpath("//div[starts-with(@id,'pad-row-0')]//*[@class='col-lg-2 col-md-4 col-sm-4'][1]//*[contains(@class ,'fa fa-circle fa-fw icon')]"));
+	
+	//24/09/2019 - capturing individual alarms for Audio
+	List<WebElement> abc =driver.findElements(By.xpath("//div[starts-with(@id,'audio-row-0')]//*[@class='col-md-2'][1]//*[contains(@class ,'fa fa-circle fa-fw icon')]"));
+		
+	System.out.println(abc.size());
+	
+	//List<WebElement> abc =driver.findElements(By.xpath("//*[@class='col-md-2'][1]//*[@class='card card-stats']//*[text() = 'R']")); 
+	for (WebElement a : abc) {
+	//a.getCssValue("color");
+
+			//System.out.println(a.getAttribute("class"));
+			System.out.println(a.getText());
+			//System.out.println(a.getCssValue("color"));
+			
+			
+			String AudioAlarms = driver.findElements(By.xpath("//div[starts-with(@id,'audio-row-0')]//*[@class='col-md-2']//*[contains(@class ,'fa fa-circle fa-fw icon')]")).get(index).getAttribute("class");
+			System.out.println("Audio Alarm "+(index)+" is: "+AudioAlarms);
+					
+				
+		
+	//24/09/2019 - putting audio alarms in a loop to find out the overall audio alarm		
+			
+
+			
+			if (AudioAlarms.contains("danger")) 
+			{
+				System.out.println("alarm is in Red");
+				
+			
+			}else if((AudioAlarms.contains("warning"))) {
+				
+				System.out.println("alarm is in Orange");
+			
+		
+			}else if((AudioAlarms.contains("success)"))) {
+				
+				System.out.println("alarm is in Green");
+			}
+				
+				else if ((AudioAlarms.contains("default"))) {
+					
+					System.out.println("alarm is in Grey");
+					
+					
+				}}}}
+			
+	
+
+	
+	
+//23/09/19 - trying to find individual left & right alarms. Capturing the colour of L & R as rgba(44, 44, 44, 1)
+	
+/*@FindBy(xpath ="//*[@class='col-md-2'][1]//*[@class='card card-stats']//*[text() = 'R']")
+	WebElement audioalarm;
+
+
+public void AudioSubComponentsColors()
+{
+	
+	
+	String audioalarm1 = audioalarm.getCssValue("color").trim();
+	System.out.println(audioalarm1);
+	
+	}}*/
+
+//xpath for the first block of PAD - //div[starts-with(@id,'pad-row-0')]//*[@class='col-lg-2 col-md-4 col-sm-4'][1]
+
+
+
+
+//path for the first block of PAD - //div[starts-with(@id,'pad-row-0')]//*[@class='col-lg-2 col-md-4 col-sm-4'][1]//*[contains(text(),'DLS')]
+	

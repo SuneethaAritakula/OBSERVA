@@ -1,0 +1,189 @@
+package com.OBSERVAMonitor;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
+
+import junit.framework.Assert;
+
+public class OBSERVAInputPage extends BaseTest {
+	
+	
+	@Test (groups = "Regression Test", priority = 1)
+	
+	public void InputPage() throws InterruptedException, IOException
+	{
+	InputPage IP = PageFactory.initElements(driver, InputPage.class);
+		
+	IP.INPUT();
+	}
+	
+	@Test (groups = "Regression Test", priority = 3)
+	public void InputPageTitle() throws InterruptedException{
+		
+	InputPage IP = PageFactory.initElements(driver, InputPage.class);
+			
+	IP.PageTitle();
+	}
+	
+	
+	/*@Test (groups = "Regression Test", priority = 0)
+	public void BulletList() throws InterruptedException{
+		
+	InputPage IP = PageFactory.initElements(driver, InputPage.class);
+		
+	IP.BulletList();
+	
+	}*/
+	
+	
+	@Test (groups = "Smoke Test", priority = 2)
+	
+	public void SwitchingFrame() throws InterruptedException{
+		
+	InputPage IP = PageFactory.initElements(driver, InputPage.class);
+				
+	IP.SwitchingFrame().click();
+    Thread.sleep(4000);
+	}
+	
+	@Test (groups = "Regression Test", priority= 4)
+		
+    public void btnToAddInput() throws InterruptedException{
+		
+    InputPage IP = PageFactory.initElements(driver, InputPage.class);
+	
+    IP.btnToAddInput();
+	Thread.sleep(1000);
+	
+    }
+	
+	@Test (groups = "Regression Test", priority=5)
+	
+    public void SelectInputsFromDropDown() throws InterruptedException{
+		
+    InputPage IP = PageFactory.initElements(driver, InputPage.class);
+	IP.SelectInputsFromDropDown();
+	
+    }
+    
+	@Test (groups = "Regression Test", priority=6)
+	
+    public void SelectInputs() throws InterruptedException{
+		
+    InputPage IP = PageFactory.initElements(driver, InputPage.class);
+	IP.SelectInputs();
+    }
+    
+		/*Select Input = new Select(driver.findElement(By.xpath("//*[@id=\'select_sourceType\']")));
+		Input.selectByIndex(0);
+		
+		for (int i = 0; i<=5; i++)
+			
+		{
+			
+			CommonMethods.readandwritedata(driver, "");
+			
+			
+		}
+		//Input.selectByVisibleText("FEP");
+		//Thread.sleep(500);
+		
+		FileInputStream file = new FileInputStream("");
+		XSSFWorkbook workbook = new XSSFWorkbook(file);
+		XSSFSheet sheet = workbook.getSheet("");*/
+		
+	@Test (groups = "Smoke Test",priority = 7)
+	 public void EDIInput() throws InterruptedException{
+		
+	 InputPage IP = PageFactory.initElements(driver, InputPage.class);
+	 IP.EDIInput();
+		
+	 }
+	    
+	 //IP.InputExistsError();
+	 //IP.txtError();
+	 //String expectedText = "Error!ETI Source E:224.1.0.46:10046 already exists";
+	 //String txtError ();
+	 //Assert.assertEquals(expectedText, txtError);
+	
+	@Test(priority = 8)
+	 
+	 public void Continuitypage() throws InterruptedException{
+		Thread.sleep(1000);
+			
+		 InputPage IP = PageFactory.initElements(driver, InputPage.class);
+			
+		 IP.Continuitypage();
+		 
+		 }
+	
+	@Test(priority = 9)
+	 
+	 public void ContentPage() throws InterruptedException{
+		Thread.sleep(1000);
+			
+		 InputPage IP = PageFactory.initElements(driver, InputPage.class);
+			
+		 IP.ContentPage();
+		 
+		 }
+	
+	@Test(priority = 10)
+		
+	 public void SilencePage() throws InterruptedException{
+		Thread.sleep(1000);
+	 InputPage IP = PageFactory.initElements(driver, InputPage.class);
+		
+		IP.SilencePage();
+	 }
+		
+	@Test(priority = 11)
+	
+	 public void ReconfigPage() throws InterruptedException{
+		Thread.sleep(1000);
+			
+	 InputPage IP = PageFactory.initElements(driver, InputPage.class);
+		
+		IP.ReconfigPage();
+	}
+		
+	@Test(priority = 12)
+	public void btnEditInput() throws InterruptedException {
+		Thread.sleep(1000);
+	InputPage IP = PageFactory.initElements(driver, InputPage.class);
+	
+	IP.btnEditInput();
+	
+	}
+	
+	@Test(priority = 13)
+	public void lblRenameInput() throws InterruptedException {
+	Thread.sleep(1000);
+	InputPage IP = PageFactory.initElements(driver, InputPage.class);
+	
+	IP.lblRenameInput();
+	
+	}}
+	
+	
+		 
+		
+
+		
+		
+		
+		
+		
+		
+		
+
+

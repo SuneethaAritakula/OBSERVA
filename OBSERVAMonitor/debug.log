@@ -22,3 +22,5 @@
 [0901/152614.907:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
 [0901/201744.831:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
 [0901/202142.109:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[1003/081031.251:ERROR:file_io_win.cc(170)] CreateFile C:\Users\factum\AppData\Local\Temp\scoped_dir13164_1144183757\Crashpad\reports\32eb1f16-8d2a-42fb-99bc-fba74cbaa968.dmp: The system cannot find the path specified. (0x3)
+[1003/081032.583:ERROR:crash_report_exception_handler.cc(97)] PrepareNewCrashReport failed

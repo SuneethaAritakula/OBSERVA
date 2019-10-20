@@ -1,0 +1,60 @@
+package com.OBSERVAMonitor;
+
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.Test;
+
+public class OBSERVASilencePage extends BaseTest {
+	
+	@Test (groups = "Regression Test", priority = 11)	public void SilencePage() throws InterruptedException {
+	
+	SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+	
+	SP.SilencePage();
+	Thread.sleep(20000);
+	//SP.CaptureAllSilenceAlarmsColor(driver);
+	SP.AudioSubComponentsColors(driver, index);
+	}
+	
+	@Test (groups = "Regression Test", priority = 12)
+	
+	
+	public void OverallInputAlarm() throws InterruptedException {
+	
+	SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+	Thread.sleep(5000);
+
+//	SP.CaptureAllSilenceAlarmsColor(driver);
+	//SP.captureSilenceAlarmComponents(driver, 0);
+	}
+	
+	/*@Test (groups = "Regression Test", priority = 13)
+	public void EDIOverallAlarm() throws InterruptedException  {
+	SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+	Thread.sleep(10000);
+	SP.EDI1OverallAlarm();
+
+}
+	@Test (groups = "Regression Test", priority = 14)
+	public void RFInputOverallAlarm() throws InterruptedException {
+		SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+		Thread.sleep(8000);
+		SP.RFInputOverallAlarm();
+		
+		
+		
+	}*/
+	
+	@Test (groups = "Regression Test", priority = 13)
+	
+	public void AudioSubComponentsColors() throws InterruptedException {
+		
+		SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+		Thread.sleep(5000);
+
+		int index = 0;
+		//SP.AudioSubComponentsColors(driver, index);	
+	
+		
+	
+
+}}

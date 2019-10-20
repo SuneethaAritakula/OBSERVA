@@ -1,5 +1,8 @@
 package com.OBSERVAMonitor;
 
+import java.awt.Color;
+import java.util.function.Function;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.By;
@@ -14,14 +17,10 @@ import org.testng.asserts.SoftAssert;
 public class InputPage {
 	
 	
-	
 	Logger logger = Logger.getLogger("InputPage");
 	
 	
-	
-	///html/body/div/div[1]/div[2]/ul/li[2]/a/p
-	
-	@FindBy(xpath = "/html/body/div/div[1]/div[2]/ul/li[2]/a/p")
+	@FindBy(xpath = "//*[text()='Input']")
 	WebElement INPUT;
 	
 	public void INPUT()
@@ -29,22 +28,20 @@ public class InputPage {
 	{
 	PropertyConfigurator.configure("log4j.properties");
 	INPUT.click();
-	logger.info("Chrome Browser instantiated successfully");
+	logger.info("Input page opened");
 
 	}
 	
-	@FindBy(xpath = "/html/body/div/div[2]/nav/div/div[1]/a")
+	@FindBy(xpath = "//a[@class='navbar-brand']['Inputs being monitored']")
 	WebElement PageTitle;
 	
 	public void PageTitle() {
 		
-		String pagetitle = PageTitle.getText();
-		Assert.assertEquals(pagetitle, "INPUTS BEING MONITORED");
+	String pagetitle = PageTitle.getText();
+	Assert.assertEquals(pagetitle, "INPUTS BEING MONITORED");
 	}
 	
-	
-	
-	@FindBy (xpath = "//*[@id=\'minimizeSidebar\']/i[2]")
+	/*@FindBy (xpath = "//*[@id=\'minimizeSidebar\']/i[2]")
 	WebElement BulletList;
 	
 	
@@ -63,9 +60,9 @@ public class InputPage {
 	return SwitchingFrame.findElement(By.xpath("/html/body/div/div[2]/div[4]"));
 		
 		
-	}
+	}*/
 	
-	@FindBy(xpath = "/html/body/div/div[2]/div[4]/div[1]/div/button/i")
+	@FindBy(xpath = "//*[@class='btn btn-primary btn-round btn-icon']")
 	WebElement btnToAddInput;
 	public void btnToAddInput()
 	
@@ -76,7 +73,7 @@ public class InputPage {
 	
 	
 	//*[@id="addSourceModal"]/div/div/div[2]/form/div[1]/div
-	@FindBy(xpath = "//*[@id='addSourceModal']/div/div/div[2]/form/div[1]/div")
+	@FindBy(xpath = "//*[@class='form-control'][@id='select_sourceType']")
 	WebElement SelectInputsFromDropDown;
 	
 	public void SelectInputsFromDropDown()
@@ -103,7 +100,7 @@ public class InputPage {
 	@FindBy(xpath = "//*[@id=\'textbox_port\']")
 	WebElement textbxPort;
 	
-	@FindBy(xpath = "//*[@id=\'EDIField\']/div[3]/div/div/label")
+	@FindBy(xpath = "//*[@class='form-check-input'][@id='checkbox_resend']")
 	WebElement chkbxResend;
 	
 	@FindBy(xpath = "//*[@id=\'btn_addInputSave\']")
@@ -157,99 +154,119 @@ public class InputPage {
 		
 		//String txtError1 = ((txtError) txtError).compareTo("Error!ETI Source E:224.1.0.46:10046 already exists");
 	
-	@FindBy(xpath = "/html/body/div/div[1]/div[2]/ul/li[3]/a/p")
+	@FindBy(xpath = "//*[text()='Continuity']")
 	WebElement lnkContinuity;
 	
-	@FindBy(xpath = "//*[@id=\'eti-key-0\']/div[1]/h4")
+	@FindBy(xpath = "//*[@class='navbar-brand'][' ETI Source Continuity Status']")
 	WebElement hdrtxtContinuityPage;
 	
 	public void Continuitypage() {
 		
 		lnkContinuity.click();
-		String expectedhdrtxt = hdrtxtContinuityPage.getText();
-		String actualText = "EDI 1 - E:224.1.0.46:10046";
 		
-		Assert.assertEquals(expectedhdrtxt, actualText);
 		}
-		
 	
-	@FindBy(xpath = "/html/body/div/div[1]/div[2]/ul/li[5]/a/p")
+	
+	@FindBy(xpath = "//*[text()='Content']")
+	WebElement ContentPage;
+	
+
+	
+	public void ContentPage()  {
+		ContentPage.click();
+		
+		//String actualContentPageEDIInput = ContentPageEDIInput.getText();
+		//String expectedContentPageEDIInput = "EDI 1 -E:224.1.0.46:10046";
+		//Assert.assertEquals(actualContentPageEDIInput, expectedContentPageEDIInput);
+		
+		
+	}
+	
+	
+	@FindBy(xpath = "//*[text()='Silence']")
 	WebElement lnkSilence;
 	
-	
-	@FindBy(xpath = "//*[@id=\'overall-state-0\']")
-	WebElement EDIHeartSymbol;
-	
-
-
-	//@FindBy(xpath = "//*[@id=/'silence-row/']/div/div/div[1]/div/div[1]")
-	//WebElement EDITitle;
-	
+	//@FindBy(xpath = "//*[@id=\"silence-row\"]/div/div/div[1]/div/div[1]/h4")
+	//WebElement InputtxtSilencePage;
 	
 
-	@FindBy(xpath = "//*[@id=\'headingOne\']/a/i[2]")
-	WebElement AudioCollapse;
-	
-
-	@FindBy(xpath= "//*[@id=\'headingTwo\']/a/i[2]")
-	WebElement PADCollpase;
-	
-
-	//@FindBy(xpath = "//*[@id=\'headingTwo\']/a/i[2]")
-	//WebElement DATACollapse;
-	
-	
-	//@FindBy(xpath = "//*[@id=\'audio-overall-0\']")
-	//WebElement AudioButtonColour; 
-
-	
 	public void SilencePage() {
-	
-	lnkSilence.click();
-	
- 
-	/*String color = EDIHeartSymbol.getCssValue("color").trim();	
-	String color_hex[];  
-	color_hex = color.replace(("#ff3636").split("255,54,54"));
-	String actual_hex = String.format("#%02x%02x%02x", Integer.parseInt(color_hex[0].trim()), Integer.parseInt(color_hex[1].trim()), Integer.parseInt(color_hex[2].trim()));  
-
-	// further can verify with Actual hex value with Expected hex value  
-	Assert.assertEquals("actual_hex should equal to: ", "#808080", actual_hex);*/
-	
-	
-
-	
-	
-	AudioCollapse.click();
-	PADCollpase.click();
-	//DATACollapse.click();
-	
-	
-	
 		
-	
-
-	
-	
-
-	
+		lnkSilence.click();
+//		String expectedInput = InputtxtSilencePage.getText();
+//		String actualInput = "EDI 1 -E:224.1.0.46:10046";
+//		Assert.assertEquals(expectedInput, actualInput);
+//		logger.info(expectedInput);
+		
+		
+		
 	}
-
 	
-
+	@FindBy(xpath = "//*[text()='Reconfiguration']")
+	WebElement lnkReconfigPage;
 	
+	//*[@id="reconfig-row"]/div/div/div[1]/h5
+	//*[@id="reconfig-row"]/div/div/div[1]/h5
+	
+	//*[@id="reconfig-row"]/div[1]/div/div[1]/h5
+	//*[@id="reconfig-row"]/div[2]/div/div[1]/h5
+	
+	@FindBy(xpath = "//*[@class='navbar-brand']['Reconfiguration History']")
+	WebElement lblReconfigPage;
+	
+	public void ReconfigPage() {
+	
+		lnkReconfigPage.click();
 		
+//		String actuallblReconfigPage = lblReconfigPage.getText();
+//		String expectedlblReconfigPage = "EDI 1 -E:224.1.0.46:10046";
+//		Assert.assertEquals(actuallblReconfigPage, expectedlblReconfigPage);
 		
+	}
 	
-	
-	
-}
-	
-	
-	
-	
-	
-	
-	
-	
+   @FindBy(xpath = "/html/body/div/div[1]/div[2]/ul/li[2]/a/p")
+   WebElement lnkBackToINPUT;
 
+   @FindBy(xpath = "//*[@id='eti-input-row']/div/div/div/div/div/div/div[3]/div/button/i")
+   WebElement btnEditButton;
+   
+  // @FindBy(xpath = "//*[@id='eti-input-row']/div/div/div/div/div/div/div[3]/div/div/a[2]")
+   //WebElement lblRemoveInput;
+   
+   public void btnEditInput() {
+	   lnkBackToINPUT.click();
+	   btnEditButton.click();
+	   	   
+   }
+   
+   @FindBy(xpath = "//*[@id=\'eti-input-row\']/div/div/div/div/div/div/div[3]/div/div/a[1]")
+   WebElement lblRenameInput;
+   
+  // @FindBy(xpath = "//*[@id='exampleModalLabel']")
+  //WebElement hdrRenameInput;
+   
+  
+   @FindBy(id = "newName")
+   WebElement txtNewname;
+   
+  // <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_renameSave">Save</button>
+   
+   @FindBy(id="btn_renameSave")
+   WebElement lblSaveRename;
+   
+   public void lblRenameInput() {
+	   
+	   lblRenameInput.click();
+	  // String actualhdrRenameInput = hdrRenameInput.getText();
+	   //Assert.assertEquals(actualhdrRenameInput, "Rename Input");
+	   txtNewname.sendKeys("EDI 2");
+	   lblSaveRename.click();
+   
+   }}
+   
+   
+   
+
+
+	
+	

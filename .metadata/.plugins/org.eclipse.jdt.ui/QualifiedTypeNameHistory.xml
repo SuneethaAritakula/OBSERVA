@@ -1,21 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="org.openqa.selenium.WebDriver"/>
 <fullyQualifiedTypeName name="org.testng.annotations.BeforeTest"/>
 <fullyQualifiedTypeName name="org.openqa.selenium.chrome.ChromeDriver"/>
 <fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
 <fullyQualifiedTypeName name="java.io.IOException"/>
-<fullyQualifiedTypeName name="com.OBSERVAMonitor.BaseTest"/>
 <fullyQualifiedTypeName name="org.openqa.selenium.support.FindBy"/>
 <fullyQualifiedTypeName name="org.testng.annotations.BeforeMethod"/>
 <fullyQualifiedTypeName name="org.testng.annotations.AfterTest"/>
 <fullyQualifiedTypeName name="org.testng.annotations.BeforeSuite"/>
 <fullyQualifiedTypeName name="org.openqa.selenium.support.PageFactory"/>
-<fullyQualifiedTypeName name="java.lang.Thread"/>
-<fullyQualifiedTypeName name="java.io.FileInputStream"/>
 <fullyQualifiedTypeName name="org.testng.annotations.Test"/>
 <fullyQualifiedTypeName name="org.openqa.selenium.WebElement"/>
-<fullyQualifiedTypeName name="org.openqa.selenium.interactions.Actions"/>
-<fullyQualifiedTypeName name="org.openqa.selenium.TakesScreenshot"/>
 <fullyQualifiedTypeName name="org.testng.asserts.SoftAssert"/>
+<fullyQualifiedTypeName name="org.testng.annotations.AfterClass"/>
+<fullyQualifiedTypeName name="org.testng.annotations.AfterMethod"/>
+<fullyQualifiedTypeName name="org.testng.annotations.AfterSuite"/>
+<fullyQualifiedTypeName name="org.apache.poi.xssf.usermodel.XSSFWorkbook"/>
+<fullyQualifiedTypeName name="org.apache.poi.xssf.usermodel.XSSFSheet"/>
+<fullyQualifiedTypeName name="org.openqa.selenium.WebDriver"/>
+<fullyQualifiedTypeName name="org.openqa.selenium.TakesScreenshot"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="org.apache.commons.io.FileUtils"/>
+<fullyQualifiedTypeName name="org.openqa.selenium.OutputType"/>
+<fullyQualifiedTypeName name="java.util.Properties"/>
+<fullyQualifiedTypeName name="java.io.FileInputStream"/>
+<fullyQualifiedTypeName name="com.OBSERVAMonitor.BaseTest"/>
+<fullyQualifiedTypeName name="org.openqa.selenium.JavascriptExecutor"/>
+<fullyQualifiedTypeName name="java.awt.RenderingHints.Key"/>
+<fullyQualifiedTypeName name="org.openqa.selenium.interactions.Actions"/>
+<fullyQualifiedTypeName name="org.openqa.selenium.Keys"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="org.openqa.selenium.support.Color"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="com.OBSERVAMonitor.SilencePage"/>
+<fullyQualifiedTypeName name="org.openqa.selenium.support.ui.WebDriverWait"/>
+<fullyQualifiedTypeName name="org.openqa.selenium.support.ui.ExpectedConditions"/>
+<fullyQualifiedTypeName name="java.lang.Thread"/>
 </qualifiedTypeNameHistroy>

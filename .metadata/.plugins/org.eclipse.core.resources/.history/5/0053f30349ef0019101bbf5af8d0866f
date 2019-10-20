@@ -1,0 +1,1113 @@
+package com.OBSERVAMonitor;
+
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
+
+
+@Test
+public class SilencePage 
+{
+	
+	private static final WebDriver driver = null;
+	private static final int i = 0;
+	   
+	
+	   String Red = "rgba(255, 54, 54, 1)";
+	   String Orange = "rgba(255, 178, 54, 1)";
+	   String Green = "rgba(24, 206, 15, 1)";
+	   String Black = "rgba(44, 44, 44, 1)";
+
+	
+	   @FindBy(xpath = " //*[text()='Silence']")
+	   WebElement lnkSilence;
+	private Object WebElement;
+	
+	// This method is used to click Silent tab on left panel
+	   public void SilencePage() 
+			{
+				
+			lnkSilence.click();
+			
+			}
+	
+	// This method is used for capturing all input titles and colors under silence page - works well
+		
+		public void CaptureAllSilenceAlarmsColor(WebDriver driver) throws InterruptedException 
+		   {
+			
+			     String Alarmcolor = null;
+			     List<WebElement> Title = driver.findElements(By.xpath("//*[@class= 'card-title']"));
+			     System.out.println("Total Inputs(alarms) on Silence page:"+Title.size());
+			     int Titlesize = Title.size();
+			     for(int i = 0;i<Titlesize;i++)	
+			          {
+				 
+				       String TitleName =  Title.get(i).getText();
+				     //  System.out.println(TitleName); 
+				       if (i<Titlesize-1) 
+				       		{
+			                  ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", Title.get(i+1));
+			                }
+            			
+			           String strHeart = driver.findElement(By.id("overall-state-"+i)).getAttribute("class");
+			
+						if (strHeart.contains("danger")) 
+						{
+							System.out.println(TitleName + " Overall alarm status - Red");
+							Alarmcolor = "Red";
+						
+						}else if(strHeart.contains("warning")) {
+							
+							System.out.println(TitleName+ " Overall alarm status - Orange");
+							Alarmcolor = "Orange";
+					
+						}
+						
+						else if(strHeart.contains("success")) 
+						{
+							
+							System.out.println(TitleName +" Overall alarm status - Green");
+							Alarmcolor = "Green";
+							
+			            }
+						else if (strHeart.contains("default")) 
+						{
+							
+							System.out.println(TitleName + " Overall alarm status - Black");
+							Alarmcolor = "Grey";
+						}
+						
+						
+      
+		   //calling common method
+			
+			
+					
+			SilencePage s =new SilencePage();
+			String AlarmComponentsColor = s.captureSilenceAlarmComponents(driver, i);
+			if (Alarmcolor.equalsIgnoreCase(AlarmComponentsColor))
+					
+					{
+				       System.out.println(TitleName+  " color status("+Alarmcolor+")  and overall components color status("+AlarmComponentsColor+ ")be equal - Pass" );
+					}
+			
+			else {
+				       System.out.println(TitleName+  " color status("+Alarmcolor+")  and overall components color status("+AlarmComponentsColor+ ")be equal - Fail" );
+				        
+				
+			     }
+		    }		
+		 }
+					
+			     
+    //This method is used for capturing Audio, pad and data colors for each alarm under silence page - this is working well
+		
+	public String captureSilenceAlarmComponents(WebDriver driver, int index)
+	
+	   {
+		    String alarmOverallComponentsColor = null;	
+		    String Red = "rgba(255, 54, 54, 1)";
+		    String Orange = "rgba(255, 178, 54, 1)";
+		    String Green = "rgba(24, 206, 15, 1)";
+		    String Grey = "rgba(136, 136, 136, 1)";
+		
+		   String AudioAlarm = driver.findElements(By.xpath("//*[starts-with(@id,'audio-overall-')]")).get(index).getCssValue("color").trim();
+		   if(AudioAlarm.equalsIgnoreCase(Red) ) {
+			   System.out.println("Audio Alarm "+(index+1)+" is: Red");
+		   } else if(AudioAlarm.equalsIgnoreCase(Orange))
+		   {
+			   System.out.println("Audio Alarm "+(index+1)+" is: Orange");
+		   }else if(AudioAlarm.equalsIgnoreCase(Green)) {
+			   System.out.println("Audio Alarm "+(index+1)+" is: Green");
+		   }else if(AudioAlarm.equalsIgnoreCase(Grey)){
+			   System.out.println("Audio Alarm "+(index+1)+" is: Grey");
+//		   }
+		   }
+		   
+		
+		   String PADAlarm = driver.findElements(By.xpath("//*[starts-with(@id,'pad-overall-')]")).get(index).getCssValue("color").trim();
+		  // System.out.println("PAD Alarm "+(index+1)+" is: "+PADAlarm);
+		   if(PADAlarm.equalsIgnoreCase(Red) ) {
+			   System.out.println("PAD Alarm "+(index+1)+" is: Red");
+		   } else if(PADAlarm.equalsIgnoreCase(Orange))
+		   {
+			   System.out.println("PAD Alarm "+(index+1)+" is: Orange");
+		   }else if(PADAlarm.equalsIgnoreCase(Green)) {
+			   System.out.println("PAD Alarm "+(index+1)+" is: Green");
+		   }
+		   else if(PADAlarm.equalsIgnoreCase(Grey)){
+			   System.out.println("PAD Alarm "+(index+1)+" is: Grey");
+		   }
+		
+		   String DATAAlarm = driver.findElements(By.xpath("//*[starts-with(@id,'data-overall-')]")).get(index).getCssValue("color").trim();
+		   //System.out.println("DATA Alarm "+(index+1)+" is: "+DATAAlarm);
+		   
+		   if(DATAAlarm.equalsIgnoreCase(Red) ) {
+			   System.out.println("DATA Alarm "+(index+1)+" is: Red");
+		   } else if(DATAAlarm.equalsIgnoreCase(Orange))
+		   {
+			   System.out.println("DATA Alarm "+(index+1)+" is: Orange");
+		   }else if(DATAAlarm.equalsIgnoreCase(Green)) {
+			   System.out.println("DATA Alarm "+(index+1)+" is: Green");
+		   }
+		   else if(DATAAlarm.equalsIgnoreCase(Grey)){
+			   System.out.println("DATA Alarm "+(index+1)+" is: Grey");
+		   }
+		   
+		   String allAlarmComponentsColor = AudioAlarm +PADAlarm + DATAAlarm ; 
+		  // System.out.println(allAlarmComponentsColor);
+		   
+		   if(allAlarmComponentsColor.contains((Red)))
+				 
+			{
+				//System.out.println("alarm is in Red");
+			   alarmOverallComponentsColor = "Red";
+					
+				
+			}else if((allAlarmComponentsColor.contains(Orange))) {
+					
+					//System.out.println("alarm is in Orange");
+				alarmOverallComponentsColor = "Orange";
+				
+			
+				}else if((allAlarmComponentsColor.contains(Green))) {
+					
+					//System.out.println("alarm is in Green");
+					alarmOverallComponentsColor = "Green";
+				}
+					
+					else if ((allAlarmComponentsColor.contains(Grey))) {
+					
+					//System.out.println("alarm is in Grey");
+					alarmOverallComponentsColor = "Grey";
+						
+			         			}
+		  
+		return alarmOverallComponentsColor ;
+		
+		   }
+		
+
+		
+//01/10/19 - trying to capture Individual Audio subcomponents with text and alarms - output is not providing Alarm colors
+//	
+//public void AudioSubComponentsColors(WebDriver driver, int index) throws InterruptedException
+//	{
+//	
+//	//String audioSubComponent = null;	
+////    String red = "danger";
+////    String orange = "warning";
+////    String green = "success";
+////    String grey = "default";
+//	
+//	  boolean bFlag  = false;
+//	
+//	  //driver.navigate().refresh();
+//	 // Thread.sleep(20000);
+//	
+//	
+//
+//    
+//   // List<WebElement> AudioSubComponentStatsText = driver.findElements(By.xpath("//div[starts-with(@id,'audio-row-0')]//*[@class='col-md-2']//*[contains(@class ,'card card-stats')]"));
+//	//int Titlesize = AudioSubComponentStatsText.size();
+//	//System.out.println("Total Audio Sub components size : "+Titlesize);
+//	  
+//	  List<WebElement> AudioSubComponents =driver.findElements(By.xpath("//div[starts-with(@id,'audio-row-0')]//*[@class='col-md-2']//*[contains(@class ,'fa fa-circle fa-fw icon')]"));
+//	  
+//	  int Titlesize1 = AudioSubComponents.size();
+//	
+//    for(int i = 0;i<Titlesize1;i++)	
+//         {
+//	 
+//	      // String Audio1Stats =  AudioSubComponentStatsText.get(i).getText();
+//	      // System.out.println("Audio sub component "+(i+1)+" text value is: "+"  "+ Audio1Stats);
+//         
+////	       List<WebElement> AudioSubComponents =AudioSubComponentStatsText.get(i).findElements(By.xpath("//div[starts-with(@id,'audio-row-0')]//*[@class='col-md-2']//*[contains(@class ,'fa fa-circle fa-fw icon')]"));
+//	       //List<WebElement> AudioSubComponents =AudioSubComponentStatsText.get(i).findElements(By.xpath("//*[contains(@class ,'fa fa-circle fa-fw icon')]"));
+//	       //int Titlesize1 = AudioSubComponents.size();
+//	       //System.out.println("Sub Audio Component "+(i+1)+ "L and R color size : "+Titlesize1);
+//	
+//	//String x = "AudioSubComponents";
+//	//System.out.println(AudioSubComponents.size());
+//		
+////	for(int i = 0;i<Titlesize;i++)	
+////        {
+////	 
+////	       String audioSubComponents =  AudioSubComponents.get(i).getText();
+////	      System.out.println(audioSubComponents);
+////        }
+//	for (WebElement audioSubComponents:AudioSubComponents)
+//	{
+//		      String x =audioSubComponents.getAttribute("class");
+//				if (x.contains("danger"))
+//				{
+//					//String y = "Red";
+//					//System.out.println("Audio Alarm "+(index)+1+" is: Red");
+//					
+//					//System.out.println(audioSubComponents.getText()+ " contains red");
+//					System.out.println(Audio1Stats+" is in Red ");
+//					bFlag = false;
+//					break ;
+//				}
+//				else if(x.contains("warning"))
+//				
+//				{
+//					//String y = "Orange";
+//				//	System.out.println("Audio Alarm "+(index+1)+" is: Orange");
+//					//System.out.println(audioSubComponents.getText()+ " contains Orange");
+//					
+//					System.out.println(Audio1Stats+" is in Orange ");
+//					bFlag = false;
+//					break;
+//					
+//					
+//				} else if(x.contains("success"))
+//				{
+//					//String y = "Green";
+////					System.out.println("Audio Alarm "+(index+1)+" is: Green");
+//					
+//					bFlag = true;
+//				}
+//					
+//					else if(x.contains("default"))
+//					{
+//						//String y = "Green";
+//						//System.out.println("Audio Alarm "+(index+1)+" is: Grey");
+//						System.out.println(Audio1Stats+" is in Grey ");
+//						bFlag = true;
+//				
+//				}
+//			}
+//	}
+//           if (bFlag == true)
+//           
+//           {
+//        	   System.out.println("All audio subcomponents are in Green");
+//        	   
+//        	   
+//           }
+//    }}
+
+	
+	
+	
+	
+	
+public void AudioSubComponentsColors(WebDriver driver, int index) throws InterruptedException
+	{
+	
+	//String audioSubComponent = null;	
+//    String red = "danger";
+//    String orange = "warning";
+//    String green = "success";
+//    String grey = "default";
+	
+	  boolean bFlag  = false;
+	
+	  //driver.navigate().refresh();
+	 // Thread.sleep(20000);
+	
+	
+
+    
+    List<WebElement> AudioSubComponentStatsText = driver.findElements(By.xpath("//div[starts-with(@id,'audio-row-0')]//*[@class='col-md-2']//*[contains(@class ,'card card-stats')]"));
+	int Titlesize = AudioSubComponentStatsText.size();
+	System.out.println("Total Audio Sub components size : "+Titlesize);
+	  
+	  List<WebElement> AudioSubComponents =driver.findElements(By.xpath("//div[starts-with(@id,'audio-row-0')]//*[@class='col-md-2']//*[contains(@class ,'fa fa-circle fa-fw icon')]"));
+	  
+	  int Titlesize1 = AudioSubComponents.size();
+	  System.out.println("Size"+Titlesize1);
+	  Thread.sleep(10000);
+	  WebDriverWait w = new WebDriverWait(driver, 60);
+	
+    for(int i = 0;i<Titlesize1;i++)	
+         {
+	 System.out.println("Inside loop");
+	      String Audio1Stats =  AudioSubComponentStatsText.get(i).getText();
+	      System.out.println("Audio sub component "+(i+1)+" text value is: "+"  "+ Audio1Stats);
+         
+//	       List<WebElement> AudioSubComponents =AudioSubComponentStatsText.get(i).findElements(By.xpath("//div[starts-with(@id,'audio-row-0')]//*[@class='col-md-2']//*[contains(@class ,'fa fa-circle fa-fw icon')]"));
+	       //List<WebElement> AudioSubComponents =AudioSubComponentStatsText.get(i).findElements(By.xpath("//*[contains(@class ,'fa fa-circle fa-fw icon')]"));
+	       //int Titlesize1 = AudioSubComponents.size();
+	       //System.out.println("Sub Audio Component "+(i+1)+ "L and R color size : "+Titlesize1);
+	
+	//String x = "AudioSubComponents";
+	//System.out.println(AudioSubComponents.size());
+		
+//	for(int i = 0;i<Titlesize;i++)	
+//        {
+//	 
+//	       String audioSubComponents =  AudioSubComponents.get(i).getText();
+//	      System.out.println(audioSubComponents);
+//        }
+//	for (WebElement audioSubComponents:AudioSubComponents)
+//	{         
+    	     w.until(ExpectedConditions.visibilityOf(AudioSubComponents.get(i)));
+		      String x =AudioSubComponents.get(i).getAttribute("class");
+		      System.out.println(x);
+				if (x.contains("danger"))
+				{
+					//String y = "Red";
+					//System.out.println("Audio Alarm "+(index)+1+" is: Red");
+					
+					//System.out.println(audioSubComponents.getText()+ " contains red");
+					System.out.println("Over all Audio is"+" is in Red ");
+					bFlag = false;
+					break ;
+				}
+				else if(x.contains("warning"))
+				
+				{
+					//String y = "Orange";
+				//	System.out.println("Audio Alarm "+(index+1)+" is: Orange");
+					//System.out.println(audioSubComponents.getText()+ " contains Orange");
+					
+					System.out.println("OverAll Audio"+" is in Orange ");
+					bFlag = false;
+					break;
+					
+					
+				} else if(x.contains("success"))
+				{
+					//String y = "Green";
+//					System.out.println("Audio Alarm "+(index+1)+" is: Green");
+					
+					bFlag = true;
+				}
+					
+					else if(x.contains("default"))
+					{
+						//String y = "Green";
+						//System.out.println("Audio Alarm "+(index+1)+" is: Grey");
+						//System.out.println(Audio1Stats+" is in Grey ");
+						bFlag = true;
+				
+				}
+			}
+	//}
+           if (bFlag == true)
+           
+           {
+        	   System.out.println("All audio subcomponents are in Green");
+        	   
+        	   
+           }
+    }
+
+	
+	
+	
+	//01/10/19 - captures attribute class and Audio subcomponent alarm colors - works well
+	public void AudioSubComponentAlarms(WebDriver driver, int index) throws InterruptedException
+	{
+     int i=0;
+	
+	List<WebElement> AudioSubComponents = driver.findElements(By.xpath("//div[starts-with(@id,'audio-row-0')]//*[@class='col-md-2']//*[contains(@class ,'fa fa-circle fa-fw icon')]"));
+	int Titlesize = AudioSubComponents.size();
+	System.out.println(Titlesize);
+		  
+	
+	for (WebElement AudioSubComponent:AudioSubComponents)
+	  {
+		 
+		{
+			//System.out.println(AudioSubComponent.getAttribute("class"));
+			
+	  						
+	if ((AudioSubComponent.getAttribute("class").contains("danger")))
+				
+	   {
+			System.out.println("Audio Alarm " +(i+1)+"  "+ "is in Red");
+					
+	   }
+	else if((AudioSubComponent.getAttribute("class").contains("warning")))
+				
+	  {
+			System.out.println("Audio Alarm " +(i+1)+"  "+ "is in Orange");
+				
+	  } 
+	else if((AudioSubComponent.getAttribute("class").contains("success")))
+				
+	   {
+		    System.out.println("Audio Alarm "+(i+1)+"  "+ "is in Green");
+				
+	   }
+	
+    else if((AudioSubComponent.getAttribute("class").contains("default")))
+					
+       {
+			System.out.println("Audio Alarm "+(i+1)+"  "+ "is in Grey");
+	   }
+	 i++;
+		}}}
+
+    
+	
+	//01/10/19 - captures attribute class and PAD subcomponent alarm colors - works well
+	public void PADSubComponentAlarms(WebDriver driver, int index) throws InterruptedException
+		
+	{
+	    
+		int i=0;
+	List<WebElement> PADSubComponents =driver.findElements(By.xpath("//div[starts-with(@id,'pad-row-0')]//*[@class='card card-stats']//*[contains(@class ,'fa fa-circle fa-fw icon')]"));
+	//div[starts-with(@id,'pad-row-0')]//*[@class='card card-stats']//*[contains(@class ,'fa fa-circle fa-fw icon')] - individual PAD and MOT under PAD returns 20 values
+	//div[starts-with(@id,'pad-row-0')]//*[@class='col-lg-2 col-md-4 col-sm-4'][1]//*[contains(@class ,'fa fa-circle fa-fw icon')] - first block returns 2 values
+	
+	
+	int Titlesize = PADSubComponents.size();
+	
+	System.out.println(Titlesize);
+	
+	for (WebElement PADSubComponent:PADSubComponents)
+	  {
+		 
+		{
+				System.out.println(PADSubComponent.getAttribute("class"));
+													
+	if ((PADSubComponent.getAttribute("class").contains("danger")))
+				
+	    {
+				System.out.println("PAD Alarm" +(index)+1+ "is in Red");
+				
+		}
+	
+	else if((PADSubComponent.getAttribute("class").contains("warning")))
+				
+		{
+				System.out.println("PAD Alarm" +(index)+1+ "is in Orange");
+						
+		} 
+	else if((PADSubComponent.getAttribute("class").contains("success")))
+		{
+					
+				System.out.println("PAD Alarm"+(index)+1+ "is in Green");
+		}
+					
+	else if((PADSubComponent.getAttribute("class").contains("default")))
+		{
+						
+			   System.out.println("PAD Alarm"+(index)+1+ "is in Grey");
+						
+		}
+	i++;
+		}}}
+	
+	
+	public void DATASubComponentAlarms(WebDriver driver, int index) throws InterruptedException
+	
+	{
+		int i=0; 
+	List<WebElement> DATASubComponents =driver.findElements(By.xpath("//div[starts-with(@id,'pad-row-0')]//*[@class='card card-stats']//*[contains(@class ,'fa fa-circle fa-fw icon')]"));
+	//div[starts-with(@id,'pad-row-0')]//*[@class='card card-stats']//*[contains(@class ,'fa fa-circle fa-fw icon')] - individual PAD and MOT under PAD returns 20 values
+	//div[starts-with(@id,'pad-row-0')]//*[@class='col-lg-2 col-md-4 col-sm-4'][1]//*[contains(@class ,'fa fa-circle fa-fw icon')] - first block returns 2 values
+	
+	
+	int Titlesize = DATASubComponents.size();
+	
+	System.out.println(Titlesize);
+	
+	for (WebElement DATASubComponent:DATASubComponents)
+	  {
+		 
+		{
+				System.out.println(DATASubComponent.getAttribute("class"));
+													
+	if ((DATASubComponent.getAttribute("class").contains("danger")))
+				
+	    {
+				System.out.println("DATA Alarm" +(index)+1+ "is in Red");
+				
+		}
+	
+	else if((DATASubComponent.getAttribute("class").contains("warning")))
+				
+		{
+				System.out.println("DATA Alarm" +(index)+1+ "is in Orange");
+						
+		} 
+	else if((DATASubComponent.getAttribute("class").contains("success")))
+		{
+					
+				System.out.println("DATA Alarm"+(index)+1+ "is in Green");
+		}
+					
+	else if((DATASubComponent.getAttribute("class").contains("default")))
+		{
+						
+			   System.out.println("DATA Alarm"+(index)+1+ "is in Grey");
+						
+		}
+	i++;
+	}}}
+
+	
+	//List<WebElement> DATASubComponents =driver.findElements(By.xpath("//div[starts-with(@id,'data-row-0')]//*[@class='col-lg-2 col-md-4 col-sm-4'][1]//*[contains(@class ,'fa fa-circle fa-fw icon')]"));
+	//String z = "DATASubComponents";
+	//System.out.println(DATASubComponents.size());
+	
+
+	
+	
+	
+	
+   //01/10/19 - captures Audio and PAD subcomponents size and text only- works well.
+	
+	public void AudioSubComponentsColors1(WebDriver driver, int index) throws InterruptedException
+	{
+	
+	    
+    List<WebElement> AudioSubComponentStatsText = driver.findElements(By.xpath("//div[starts-with(@id,'audio-row-0')]//*[@class='col-md-2']//*[contains(@class ,'card card-stats')]"));
+	int Titlesize = AudioSubComponentStatsText.size();
+	System.out.println("Total Audio Sub components size (total number of inputs) :"+Titlesize);
+	
+	for(int i = 0;i<Titlesize;i++)	
+    {
+	 
+	       String Audio1Stats =  AudioSubComponentStatsText.get(i).getText();
+	       System.out.print("Audio sub component "+(i+1)+"  statistics below: "+"  ");
+	       System.out.println(" "+ Audio1Stats);
+	
+    }
+					
+	List<WebElement> PADSubComponentStatsText = driver.findElements(By.xpath("//div[starts-with(@id,'pad-row-0')]//*[@class='col-lg-2 col-md-4 col-sm-4']//*[contains(@class ,'card card-stats')]"));
+	int Titlesize1 = PADSubComponentStatsText.size();
+	System.out.println("Total PAD Sub components size (total number of inputs) : "+Titlesize1);
+	
+	for(int j = 0;j<Titlesize1;j++)	
+    {
+	 
+	       String PAD1Stats =  PADSubComponentStatsText.get(j).getText();
+	       System.out.print("PAD sub component "+(j+1)+"  statistics below: "+"  ");
+	       System.out.println(" "+ PAD1Stats);
+	
+    }
+	
+	List<WebElement> DATASubComponentStatsText = driver.findElements(By.xpath("//div[starts-with(@id,'pad-row-0')]//*[@class='col-lg-2 col-md-4 col-sm-4']//*[contains(@class ,'card card-stats')]"));
+	int Titlesize2 = PADSubComponentStatsText.size();
+	System.out.println("Total PAD Sub components size (total number of inputs) : "+Titlesize2);
+	
+	for(int j = 0;j<Titlesize2;j++)	
+    {
+	 
+	       String DATAStats =  DATASubComponentStatsText.get(j).getText();
+	       System.out.print("PAD sub component "+(j+1)+"  statistics below: "+"  ");
+	       System.out.println(" "+ DATAStats);
+				
+							
+							}}
+					
+					
+					
+				
+//01/10/19 - trying to capture Individual Audio subcomponents with text and alarms  - works well but only gets 10 fa fa-circle fa-fw icon icon-success msgs rather than 20
+/*
+public void AudioSubComponentsColorsandStats(WebDriver driver, int index) throws InterruptedException
+	{
+	
+	
+	  boolean bFlag  = false;
+	  
+List<WebElement> AudioSubComponents =driver.findElements(By.xpath("//div[starts-with(@id,'audio-row-0')]//*[@class='col-md-2']//*[contains(@class ,'fa fa-circle fa-fw icon')]"));
+
+int Titlesize1 = AudioSubComponents.size();
+
+System.out.println("Sub Audio Components "+"(total L and R alarms for the input):" +Titlesize1);
+
+  
+  List<WebElement> AudioSubComponentStatsText = driver.findElements(By.xpath("//div[starts-with(@id,'audio-row-0')]//*[@class='col-md-2']//*[contains(@class ,'card card-stats')]"));
+	int Titlesize = AudioSubComponentStatsText.size();
+	System.out.println("Audio Sub components for the input : "+Titlesize);
+	 
+  for(int i = 0;i<Titlesize;i++)	
+       {
+	   
+	  int retryCount=0;
+	  while(retryCount<2)
+		{
+	      try {
+//	       String Audio1Stats =  AudioSubComponentStatsText.get(i).getText();
+	    	  String Audio1Stats =  "check";
+	       //System.out.print("Audio sub component "+(i+1)+"  statistics below: "+"  ");
+	       //System.out.println(" "+ Audio1Stats);
+	       
+	         
+	       
+	       for (WebElement audioSubComponents:AudioSubComponents)
+	 	  {
+	 		 
+	 		{
+	 				//System.out.println(audioSubComponents.getAttribute("class"));
+	 													
+	 	if ((audioSubComponents.getAttribute("class").contains("danger")))
+	 				
+	 	    {
+	 		System.out.println(" is in Red ");
+				bFlag = false;
+				break ;
+	 				
+	 		}
+	 	
+	 	else if((audioSubComponents.getAttribute("class").contains("warning")))
+	 				
+	 		{
+	 		System.out.println(Audio1Stats+" is in Orange ");
+				bFlag = false;
+				break ;
+	 						
+	 		} 
+	 	else if((audioSubComponents.getAttribute("class").contains("success")))
+	 		{
+	 					
+	 		System.out.println(Audio1Stats+" is in Green ");
+				bFlag = false;
+				break ;
+	 		}
+	 					
+	 	else if((audioSubComponents.getAttribute("class").contains("default")))
+	 		{
+	 						
+	 		System.out.println(Audio1Stats+" is in Grey ");
+				bFlag = false;
+				break ;
+	 						
+	 		}
+	       
+	}
+	   			}
+	   	
+	            if (bFlag == true)
+	            
+	            {
+	         	   System.out.println("All audio subcomponents are in Green");
+	         	   
+	         	   
+	            }
+	            
+	  }
+	      catch(StaleElementReferenceException exp) {
+				retryCount++;
+//				Thread.sleep(1000);
+	        }
+	      catch(Exception exp) {
+				exp.getStackTrace();
+	        }
+		}
+       }
+	  }
+  */
+
+//01/10/19 - trying to capture Individual Audio subcomponents with text and alarms  - works well but only gets 10 fa fa-circle fa-fw icon icon-success msgs rather than 20
+
+/*public void AudioSubComponentsColorsandStats(WebDriver driver, int index) throws InterruptedException
+	{
+	
+	
+	  boolean bFlag  = false;
+	  
+//List<WebElement> AudioSubComponents =driver.findElements(By.xpath("//div[starts-with(@id,'audio-row-0')]//*[@class='col-md-2']//*[contains(@class ,'fa fa-circle fa-fw icon')]"));
+//
+//int Titlesize1 = AudioSubComponents.size();
+//
+//System.out.println("Sub Audio Components "+"(total L and R alarms for the input):" +Titlesize1);
+
+
+List<WebElement> AudioSubComponentStatsText = driver.findElements(By.xpath("//div[starts-with(@id,'audio-row-0')]//*[@class='col-md-2']//*[contains(@class ,'card card-stats')]"));
+	int Titlesize = AudioSubComponentStatsText.size();
+	System.out.println("Audio Sub components for the input : "+Titlesize);
+	 
+for(int i = 1;i<=Titlesize;i++)	
+     {
+	   
+	  int retryCount=0;
+	  while(retryCount<2)
+		{
+	      try {
+
+	       
+	    	  String  audioxpath1="//*[@id='audio-collapse-0']/div/div/div[";
+	    	  String audioxpath2="]/div/div/div/div/div[1]/div[1]/i";
+	    	  String audiostatus=driver.findElement(By.xpath(audioxpath1+i+audioxpath2)).getAttribute("class");
+	       
+	       
+	     
+	 	if (audiostatus.contains("danger"))
+	 				
+	 	    {
+	 		System.out.println(audiostatus+" is in Red ");
+				bFlag = false;
+				break ;
+	 				
+	 		}
+	 	
+	 	else if(audiostatus.contains("warning"))
+	 				
+	 		{
+	 		System.out.println(audiostatus+" is in Orange ");
+				bFlag = false;
+				break ;
+	 						
+	 		} 
+	 	else if(audiostatus.contains("success"))
+	 		{
+	 					
+	 		System.out.println(audiostatus+" is in Green ");
+				bFlag = false;
+				break ;
+	 		}
+	 					
+	 	else if(audiostatus.contains("default"))
+	 		{
+	 						
+	 		System.out.println(audiostatus+" is in Grey ");
+				bFlag = false;
+				break ;
+	 						
+	 		}
+	       
+	
+	   			
+	   	
+	            if (bFlag == true)
+	            
+	            {
+	         	   System.out.println("All audio subcomponents are in Green");
+	         	   
+	         	   
+	            }
+	            
+	  }
+	      catch(StaleElementReferenceException exp) {
+				retryCount++;
+//				Thread.sleep(1000);
+	        }
+	      catch(Exception exp) {
+				exp.getStackTrace();
+	        }
+		}
+     }
+	  }*/
+
+
+
+//08/10/19 - throws element not interactable at line 681
+
+//Total OverallSilenceSettings size (total number of inputs) :3
+//Total collapse buttons: 9
+//Total collapse buttons: 9
+//Total collapse buttons: 9
+//PASSED: loadurl
+//PASSED: SilencePage
+//PASSED: OverallInputAlarms
+//PASSED: SubComponentAlarms
+//FAILED: OverallSilenceSettings
+//org.openqa.selenium.ElementNotInteractableException: element not interactable
+
+public void OverallSilenceAudioSettings(WebDriver driver) throws InterruptedException
+
+{
+//	int x= 3;
+//	 List<WebElement> OverallSilenceSettingsButtons = driver.findElements(By.xpath("//*[@id='silence-row']/div[1]/div/div[1]/div/div[2]/button"));
+	WebElement overallSilenceButton= driver.findElement(By.xpath("//*[@id='silence-row']/div[1]/div/div[1]/div/div[2]/button"));	
+	 
+//		int Titlesize = OverallSilenceSettingsButtons.size();
+//		System.out.println("Total OverallSilenceSettings size (total number of inputs) :"+Titlesize);
+	if(overallSilenceButton.isEnabled()) {
+		overallSilenceButton.click();
+		
+		driver.findElement(By.xpath("//*[@id='audiothreshold']")).clear();
+	  	driver.findElement(By.xpath("//*[@id='audiothreshold']")).sendKeys("-4");
+	  	Thread.sleep(500);
+	  	driver.findElement(By.xpath("//*[@id='audiotimeout']")).clear();
+	  	driver.findElement(By.xpath("//*[@id='audiotimeout']")).sendKeys("3");
+	  	Thread.sleep(500);
+	  	driver.findElement(By.xpath("//button[@id='btn_save']")).click();
+	}
+}
+
+
+
+
+		/*for(int i = 0;i<Titlesize;i++)	
+	    {
+			List<WebElement> OverallSilenceSettingsButtonsIn = driver.findElements(By.xpath("//*[@class='btn btn-default btn-fab btn-icon btn-round btn-configedit-overall pull-right']//*[@class='fas fa-cog']"));
+
+		 
+		      
+		              
+		     if(i ==Titlesize-1 ) {
+		    	// ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", OverallSilenceSettingsButtonsIn.get(i+1));
+		    	 new Actions(driver).sendKeys(Keys.ARROW_DOWN).build().perform();
+		    	 new Actions(driver).sendKeys(Keys.ARROW_DOWN).build().perform();
+		    	 new Actions(driver).sendKeys(Keys.ARROW_DOWN).build().perform();
+		     }
+				OverallSilenceSettingsButtonsIn.get(i).click();
+				 Thread.sleep(1000);
+		       
+	       ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath("//button[@id='btn_save']")));
+		      driver.findElement(By.xpath("//button[@id='btn_save']")).click();
+		      Thread.sleep(10000);
+//		      driver.navigate().refresh();
+//				Thread.sleep(5000);
+		      //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", OverallSilenceSettingsButtonsIn.get(i+1));
+				
+		      
+		      
+		    List<WebElement> collapseButtons =  driver.findElements(By.xpath("//*[@class='now-ui-icons arrows-1_minimal-down']"));		  	 
+		  	System.out.println("Total collapse buttons: "+collapseButtons.size());
+	      
+	      for(int j = 0;j<x;j++)
+		      {
+		    	  collapseButtons.get(j).click();
+		    	  
+		      }
+	      Thread.sleep(5000);
+	      
+	      x =x+3;
+		     
+
+}  */ 
+
+
+//08/10/2019 
+
+
+
+
+public void OverallSilenceSettings(WebDriver driver, int index) throws InterruptedException{
+	
+
+	//for(int i = 0;i<;i++)	
+     // {
+	 
+	      // String TitleName =  overallsilencebuttons.get(i).getText();
+	      // System.out.println(TitleName); 
+	       //if (i<3)
+	
+	driver.findElement(By.xpath("//*[@id='silence-row']/div[1]/div/div[1]/div/div[2]/button")).click();
+		//30s timeout, use timeout not sleep
+//	WebDriverWait wait = new WebDriverWait(driver, 300); 
+//	By xpath = By.xpath("//*[@id='silence-row']/div[1]/div/div[1]/div/div[2]/button]["+i+"]");
+	//wait for element to be clickable, then click
+	
+	driver.findElement(By.xpath("//*[@id='audiothreshold']")).clear();
+  	driver.findElement(By.xpath("//*[@id='audiothreshold']")).sendKeys("-4");
+  	Thread.sleep(500);
+  	driver.findElement(By.xpath("//*[@id='audiotimeout']")).clear();
+  	driver.findElement(By.xpath("//*[@id='audiotimeout']")).sendKeys("3");
+  	Thread.sleep(500);
+  	driver.findElement(By.xpath("//button[@id='btn_save']")).click();
+  	
+	Thread.sleep(500);
+	
+	
+	driver.findElement(By.xpath("//*[@id='silence-row']/div[2]/div/div[1]/div/div[2]/button")).click();
+	//30s timeout, use timeout not sleep
+//WebDriverWait wait = new WebDriverWait(driver, 300); 
+//By xpath = By.xpath("//*[@id='silence-row']/div[1]/div/div[1]/div/div[2]/button]["+i+"]");
+//wait for element to be clickable, then click
+
+driver.findElement(By.xpath("//*[@id='audiothreshold']")).clear();
+	driver.findElement(By.xpath("//*[@id='audiothreshold']")).sendKeys("-4");
+	Thread.sleep(500);
+	driver.findElement(By.xpath("//*[@id='audiotimeout']")).clear();
+	driver.findElement(By.xpath("//*[@id='audiotimeout']")).sendKeys("3");
+	Thread.sleep(500);
+	driver.findElement(By.xpath("//button[@id='btn_save']")).click();
+	
+Thread.sleep(500);
+//  	List<WebElement> overallsilencebuttons = driver.findElements(By.xpath("//*[@class='btn btn-default btn-fab btn-icon btn-round btn-configedit-overall pull-right']"));
+//  
+//   		{
+//        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", overallsilencebuttons.get(i++));          
+  
+//  	new Actions(driver).sendKeys(Keys.ARROW_DOWN).build().perform();
+//	new Actions(driver).sendKeys(Keys.ARROW_DOWN).build().perform();
+//	new Actions(driver).sendKeys(Keys.ARROW_DOWN).build().perform();
+//	new Actions(driver).sendKeys(Keys.ARROW_DOWN).build().perform();
+//	new Actions(driver).sendKeys(Keys.ARROW_DOWN).build().perform();
+//	new Actions(driver).sendKeys(Keys.ARROW_DOWN).build().perform();
+//	Thread.sleep(500);
+//	
+//	driver.findElement(By.xpath("//*[@class='btn btn-default btn-fab btn-icon btn-round btn-configedit-overall pull-right']["+i+"]")).click();
+//	WebDriverWait wait1 = new WebDriverWait(driver, 300); 
+//	By xpath1 = By.xpath("//div[@class='btn btn-default btn-fab btn-icon btn-round btn-configedit-overall pull-right']");
+//	
+//	driver.findElement(By.xpath("//*[@id='audiothreshold']")).clear();
+//  	driver.findElement(By.xpath("//*[@id='audiothreshold']")).sendKeys("-4");
+//  	Thread.sleep(500);
+//  	driver.findElement(By.xpath("//*[@id='audiotimeout']")).clear();
+//  	driver.findElement(By.xpath("//*[@id='audiotimeout']")).sendKeys("3");
+//  	Thread.sleep(500);
+//  	driver.findElement(By.xpath("//button[@id='btn_save']")).click();
+//	
+//	List<WebElement> overallsilencebuttons = driver.findElements(By.xpath("//*[@class='btn btn-default btn-fab btn-icon btn-round btn-configedit-overall pull-right']"));
+//    System.out.println("Total silence buttons:"+overallsilencebuttons.size());
+//    int Titlesize = overallsilencebuttons.size();
+//    for(int i = 0;i<Titlesize;i++)	
+//         {
+//	 
+//	      // String TitleName =  overallsilencebuttons.get(i).getText();
+//	      // System.out.println(TitleName); 
+//	       if (i<Titlesize-1) 
+//	       		{
+//                 ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", overallsilencebuttons.get(i+1));
+//                 
+//                 new Actions(driver).sendKeys(Keys.ARROW_UP).build().perform();
+//                 new Actions(driver).sendKeys(Keys.ARROW_UP).build().perform();
+//                 new Actions(driver).sendKeys(Keys.ARROW_UP).build().perform();
+//                 
+//		    	 WebElement ele = driver.findElement(By.xpath("//*[@class='btn btn-default btn-fab btn-icon btn-round btn-configedit-overall pull-right']//*[@class='fas fa-cog']"));
+//		    	 JavascriptExecutor executor = (JavascriptExecutor)driver;
+//		    	 executor.executeScript("arguments[0].click();", ele);
+//		    	 
+////		    	 for(int j = 0; j<5; j++)
+////		    	 {
+////		    	driver.findElement(By.xpath("//div[@class='btn btn-default btn-fab btn-icon btn-round btn-configedit-overall pull-right']["+j+"]")).click();
+////		    	    //System.out.println(value);
+////		    	 }
+//		    	 
+//		    	 
+//		    	 
+//			       // OverallSilenceSettingsButtonsIn.get(i).click();
+//                    driver.findElement(By.xpath("//*[@id='audiothreshold']")).clear();
+//				  	driver.findElement(By.xpath("//*[@id='audiothreshold']")).sendKeys("-4");
+//				  	Thread.sleep(500);
+//				  	driver.findElement(By.xpath("//*[@id='audiotimeout']")).clear();
+//				  	driver.findElement(By.xpath("//*[@id='audiotimeout']")).sendKeys("3");
+//				  	Thread.sleep(500);
+//				  	driver.findElement(By.xpath("//button[@id='btn_save']")).click();
+//					Thread.sleep(5000);
+//					
+//				
+//					
+//					
+//					//((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", overallsilencebuttons.get(i+1));
+//					
+//					new Actions(driver).sendKeys(Keys.ARROW_DOWN).build().perform();
+//					new Actions(driver).sendKeys(Keys.ARROW_DOWN).build().perform();
+//					new Actions(driver).sendKeys(Keys.ARROW_DOWN).build().perform();
+//					Thread.sleep(5000);
+//					
+//					//driver.navigate().refresh();
+//					Thread.sleep(5000);
+//					
+               }
+	      
+       
+          
+         
+
+public void AudioSubComponentsColorsandStats(WebDriver driver, int index) throws InterruptedException
+{
+
+
+  boolean bFlag  = false;
+  
+//List<WebElement> AudioSubComponents =driver.findElements(By.xpath("//div[starts-with(@id,'audio-row-0')]//*[@class='col-md-2']//*[contains(@class ,'fa fa-circle fa-fw icon')]"));
+//
+//int Titlesize1 = AudioSubComponents.size();
+//
+//System.out.println("Sub Audio Components "+"(total L and R alarms for the input):" +Titlesize1);
+
+
+List<WebElement> AudioSubComponentStatsText = driver.findElements(By.xpath("//div[starts-with(@id,'audio-row-0')]//*[@class='col-md-2']//*[contains(@class ,'card card-stats')]"));
+int Titlesize = AudioSubComponentStatsText.size();
+System.out.println("Audio Sub components for the input : "+Titlesize);
+ 
+for(int i = 1;i<=Titlesize;i++)	
+ {
+   
+  int retryCount=0;
+  while(retryCount<2)
+	{
+      try {
+
+       
+    	  
+    	 // String  audioxpath1="//*[@id='audio-collapse-0']/div/div/div[";
+    	// String audioxpath2="]/div/div/div/div/div[1]/div[1]/i";
+    	  
+    	 String  audioxpath1="//*[@id='pad-collapse-0']/div/div/div[";
+      	 String audioxpath2="]/div/div/div/div/div[1]/div[1]/i";
+      	  
+    	 
+    	  String audiostatus=driver.findElement(By.xpath(audioxpath1+i+audioxpath2)).getAttribute("class");
+       
+    	  ////*[@id="audio-collapse-0"]/div/div/div[4]/div/div/div/div/div/div[1]/i
+       
+     
+ 	if (audiostatus.contains("danger"))
+ 				
+ 	    {
+ 		System.out.println(audiostatus+" is in Red ");
+			bFlag = false;
+			break ;
+ 				
+ 		}
+ 	
+ 	else if(audiostatus.contains("warning"))
+ 				
+ 		{
+ 		System.out.println(audiostatus+" is in Orange ");
+			bFlag = false;
+			break ;
+ 						
+ 		} 
+ 	else if(audiostatus.contains("success"))
+ 		{
+ 					
+ 		System.out.println(audiostatus+" is in Green ");
+			bFlag = false;
+			break ;
+ 		}
+ 					
+ 	else if(audiostatus.contains("default"))
+ 		{
+ 						
+ 		System.out.println(audiostatus+" is in Grey ");
+			bFlag = false;
+			break ;
+ 						
+ 		}
+       
+
+   			
+   	
+            if (bFlag == true)
+            
+            {
+         	   System.out.println("All audio subcomponents are in Green");
+         	   
+         	   
+            }
+            
+  }
+      catch(StaleElementReferenceException exp) {
+			retryCount++;
+//			Thread.sleep(1000);
+        }
+      catch(Exception exp) {
+			exp.getStackTrace();
+        }
+	}
+ }
+}}
+
+		
+	
+	
+
+
+

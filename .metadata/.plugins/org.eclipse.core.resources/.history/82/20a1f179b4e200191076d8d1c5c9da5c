@@ -1,0 +1,7 @@
+package com.OBSERVAMonitor;
+
+public class OBSERVAContinuityPage extends BaseTest{
+	
+	
+
+}

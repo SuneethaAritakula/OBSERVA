@@ -1,0 +1,249 @@
+package com.OBSERVAMonitor;
+
+import java.awt.Color;
+import java.awt.RenderingHints.Key;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+
+@Test
+public class SilencePage 
+{
+	
+	   String Red = "rgba(255, 54, 54, 1)";
+	   String Orange = "rgba(255, 178, 54, 1)";
+	   String Green = "rgba(24, 206, 15, 1)";
+	   String Black = "rgba(44, 44, 44, 1)";
+
+	
+	   @FindBy(xpath = " //*[text()='Silence']")
+	   WebElement lnkSilence;
+	
+	// This method is used to click Silent tab on left side panel
+	   public void SilencePage() 
+			{
+				
+			lnkSilence.click();
+			
+			}
+	
+	// This method is used for capturing all Alarm card titles colors under silence page - works well
+		
+		public void CaptureAllSilenceAlarmsColor(WebDriver driver) throws InterruptedException 
+		   {
+			
+			     String Alarmcolor = null;
+			     List<WebElement> Title = driver.findElements(By.xpath("//*[@class= 'card-title']"));
+			     System.out.println("Total Inputs(alarms) on Silence page:"+Title.size());
+			     int Titlesize = Title.size();
+			     for(int i = 0;i<Titlesize;i++)	
+			          {
+				 
+				       String TitleName =  Title.get(i).getText();
+				       System.out.println(TitleName); 
+				       if (i<Titlesize-1) 
+				       		{
+			                  ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", Title.get(i+1));
+			                }
+            			
+			           String strHeart = driver.findElement(By.id("overall-state-"+i)).getAttribute("class");
+			
+						if (strHeart.contains("danger")) 
+						{
+							System.out.println(TitleName + " Overall alarm status - Red");
+							Alarmcolor = "Red";
+						
+						}else if(strHeart.contains("warning")) {
+							
+							System.out.println(TitleName+ " Overall alarm status - Orange");
+							Alarmcolor = "Orange";
+					
+						}
+						
+						else if(strHeart.contains("success")) 
+						{
+							
+							System.out.println(TitleName +" Overall alarm status - Green");
+							Alarmcolor = "Green";
+							
+			            }
+						else if (strHeart.contains("default")) 
+						{
+							
+							System.out.println(TitleName + " Overall alarm status - Black");
+							Alarmcolor = "Black";
+						}
+						
+						
+      
+		   //calling common method
+			
+			
+					
+			SilencePage s =new SilencePage();
+			String AlarmComponentsColor = s.captureSilenceAlarmComponents(driver, i);
+			if (Alarmcolor.equalsIgnoreCase(AlarmComponentsColor))
+					
+					{
+				       System.out.println(TitleName+  " "+"status "+Alarmcolor +" - Pass");
+					}
+			
+			else {
+				
+				     
+				System.out.println(TitleName+  " "+"status "+Alarmcolor +" - Fail");
+			     }
+		    }		
+		 }
+					
+			     
+    //This method is used for capturing Audio, pad and data colors for each alarm under silence page - this is working well
+	public String captureSilenceAlarmComponents(WebDriver driver, int index)
+	
+	   {
+		
+		    String Red = "rgba(255, 54, 54, 1)";
+		    String Orange = "rgba(255, 178, 54, 1)";
+		    String Green = "rgba(24, 206, 15, 1)";
+		    String Grey = "rgba(136, 136, 136, 1)";
+		
+		   String AudioAlarm = driver.findElements(By.xpath("//*[starts-with(@id,'audio-overall-')]")).get(index).getCssValue("color").trim();
+		   System.out.println("Audio Alarm "+(index+1)+" is: "+AudioAlarm);
+		
+		   String PADAlarm = driver.findElements(By.xpath("//*[starts-with(@id,'pad-overall-')]")).get(index).getCssValue("color").trim();
+		   System.out.println("PAD Alarm "+(index+1)+" is: "+PADAlarm);
+		
+		   String DATAAlarm = driver.findElements(By.xpath("//*[starts-with(@id,'data-overall-')]")).get(index).getCssValue("color").trim();
+		   System.out.println("DATA Alarm "+(index+1)+" is: "+DATAAlarm);
+		  
+		   
+		   String allAlarmComponentsColor = AudioAlarm +PADAlarm + DATAAlarm ;
+		   
+		   if(allAlarmComponentsColor.contains((Red)))
+				 
+			{
+				//System.out.println("alarm is in Red");
+			   return "Red";
+					
+				
+			}else if((allAlarmComponentsColor.contains("Orange"))) {
+					
+					//System.out.println("alarm is in Orange");
+				return "Orange";
+				
+			
+				}else if((allAlarmComponentsColor.contains("Green)"))) {
+					
+					//System.out.println("alarm is in Green");
+					return "Green";
+				}
+					
+					else if ((allAlarmComponentsColor.contains("Grey"))) {
+						
+						//System.out.println("alarm is in Grey");
+						return "Grey";
+						
+			         
+				}
+		
+		   }
+		
+}	
+		
+	//22/09/19 - trying to find individual left & right alarms
+	
+public void AudioSubComponentsColors(WebDriver driver) throws InterruptedException
+	{
+	
+	
+	//List<WebElement> abc =driver.findElements(By.xpath("//div[@class='col-md-2'][1]")); 
+	//List<WebElement> abc =driver.findElements(By.xpath("//div[@class='col-md-2'][1]"));
+	
+	//List<WebElement> abc =driver.findElements(By.xpath("//*[@class='col-md-2'][1]//*[contains(@class ,'fa fa-circle fa-fw icon')]"));
+	
+	// 24/09/2019 - capturing individual alarms for PAD & MOT
+	//List<WebElement> abc =driver.findElements(By.xpath("//div[starts-with(@id,'pad-row-0')]//*[@class='col-lg-2 col-md-4 col-sm-4'][1]//*[contains(@class ,'fa fa-circle fa-fw icon')]"));
+	
+	//24/09/2019 - capturing individual alarms for Audio
+	List<WebElement> AudioSubComponents =driver.findElements(By.xpath("//div[starts-with(@id,'audio-row-0')]//*[@class='col-md-2']//*[contains(@class ,'fa fa-circle fa-fw icon')]"));
+		
+	System.out.println(AudioSubComponents.size());
+	
+	//List<WebElement> abc =driver.findElements(By.xpath("//*[@class='col-md-2'][1]//*[@class='card card-stats']//*[text() = 'R']")); 
+	for (WebElement audioSubComponent:AudioSubComponents) {
+	//a.getCssValue("color");
+
+			//System.out.println(a.getAttribute("class"));
+			System.out.println(audioSubComponent.getAttribute("class"));
+			//System.out.println(a.getCssValue("color"));
+			
+	}}
+			
+			
+			//String AudioAlarms = driver.findElements(By.xpath("//div[starts-with(@id,'audio-row-0')]//*[@class='col-md-2']//*[contains(@class ,'fa fa-circle fa-fw icon')]")).get(index).getAttribute("class");
+			//System.out.println("Audio Alarm "+(index)+" is: "+AudioAlarms);
+					
+				
+		
+	//24/09/2019 - putting audio alarms in a loop to find out the overall audio alarm		
+			
+
+			
+			/*if (AudioAlarms.contains("danger")) 
+			{
+				System.out.println("alarm is in Red");
+				
+			
+			}else if((AudioAlarms.contains("warning"))) {
+				
+				System.out.println("alarm is in Orange");
+			
+		
+			}else if((AudioAlarms.contains("success)"))) {
+				
+				System.out.println("alarm is in Green");
+			}
+				
+				else if ((AudioAlarms.contains("default"))) {
+					
+					System.out.println("alarm is in Grey");
+					
+					
+				}}}}*/
+			
+	
+
+	
+	
+//23/09/19 - trying to find individual left & right alarms. Capturing the colour of L & R as rgba(44, 44, 44, 1)
+	
+/*@FindBy(xpath ="//*[@class='col-md-2'][1]//*[@class='card card-stats']//*[text() = 'R']")
+	WebElement audioalarm;
+
+
+public void AudioSubComponentsColors()
+{
+	
+	
+	String audioalarm1 = audioalarm.getCssValue("color").trim();
+	System.out.println(audioalarm1);
+	
+	}}*/
+
+//xpath for the first block of PAD - //div[starts-with(@id,'pad-row-0')]//*[@class='col-lg-2 col-md-4 col-sm-4'][1]
+
+
+
+
+//path for the first block of PAD - //div[starts-with(@id,'pad-row-0')]//*[@class='col-lg-2 col-md-4 col-sm-4'][1]//*[contains(text(),'DLS')]
+	
+}

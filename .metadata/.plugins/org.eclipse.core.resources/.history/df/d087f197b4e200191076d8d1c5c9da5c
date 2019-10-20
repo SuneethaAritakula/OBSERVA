@@ -1,0 +1,16 @@
+package com.OBSERVAMonitor;
+
+import org.openqa.selenium.support.PageFactory;
+
+public class OBSERVAContinuityPage extends BaseTest{
+	
+ContinuityPage CP = PageFactory.initElements(driver, ContinuityPage.class);
+	
+	CP.ContinuityPage();
+	Thread.sleep(20000);
+	//SP.CaptureAllSilenceAlarmsColor(driver);
+	CP.CaptureAllContinuityAlarmsColor();
+	
+	
+
+}}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;OBSERVAMonitor/Input.properties&apos; to &apos;EnvironmentConfig&apos;" description="Rename resource &apos;Input.properties&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Input.properties" name="EnvironmentConfig" stamp="1567937705673" updateReferences="true"/>
+</session>

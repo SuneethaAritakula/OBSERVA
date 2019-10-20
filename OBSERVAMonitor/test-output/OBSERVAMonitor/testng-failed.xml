@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [OBSERVAMonitor]">
-  <test thread-count="5" name="Test(failed)">
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [OBSERVAMonitor]">
+  <test thread-count="5" name="OBSERVAMonitor(failed)">
     <groups>
       <run>
+        <include name="Test"/>
         <include name="Smoke Test"/>
         <include name="Regression Test"/>
       </run>
@@ -11,9 +12,28 @@
     <classes>
       <class name="com.OBSERVAMonitor.OBSERVAInputPage">
         <methods>
-          <include name="InputPage"/>
+          <include name="lblRenameInput"/>
+          <include name="ContentPage"/>
+          <include name="SilencePage"/>
+          <include name="ReconfigPage"/>
+          <include name="instantiateBrowser"/>
+          <include name="btnEditInput"/>
+          <include name="Continuitypage"/>
         </methods>
       </class> <!-- com.OBSERVAMonitor.OBSERVAInputPage -->
+      <class name="com.OBSERVAMonitor.OBSERVASilencePage">
+        <methods>
+          <include name="OverallSilenceSettings"/>
+          <include name="instantiateBrowser"/>
+        </methods>
+      </class> <!-- com.OBSERVAMonitor.OBSERVASilencePage -->
+      <class name="com.OBSERVAMonitor.OBSERVADashboardPage">
+        <methods>
+          <include name="instantiateBrowser"/>
+          <include name="ApplicationFooter"/>
+          <include name="lnksLeftPanel"/>
+        </methods>
+      </class> <!-- com.OBSERVAMonitor.OBSERVADashboardPage -->
     </classes>
-  </test> <!-- Test(failed) -->
+  </test> <!-- OBSERVAMonitor(failed) -->
 </suite> <!-- Failed suite [OBSERVAMonitor] -->

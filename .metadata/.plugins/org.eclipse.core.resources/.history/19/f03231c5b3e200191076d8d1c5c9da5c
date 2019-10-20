@@ -1,0 +1,25 @@
+package com.OBSERVAMonitor;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class ContinuityPage {
+
+	
+	String Red = "rgba(255, 54, 54, 1)";
+	   String Orange = "rgba(255, 178, 54, 1)";
+	   String Green = "rgba(24, 206, 15, 1)";
+	   String Black = "rgba(44, 44, 44, 1)";
+	   String Grey= "rgba(136, 136, 136, 1)";
+	   
+	   @FindBy(xpath = " //*[text()='Continuity']")
+	   WebElement lnkContinuity;
+	
+	// This method is used to click Silent tab on left side panel
+	   public void ContinuityPage() 
+			{
+				
+		   lnkContinuity.click();
+			
+			}
+}

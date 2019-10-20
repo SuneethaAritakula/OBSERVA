@@ -1,0 +1,13 @@
+package com.OBSERVAMonitor;
+
+import org.openqa.selenium.support.PageFactory;
+
+public class OBSERVAContinuityPage extends BaseTest{
+	
+	public void ContinuityPage() throws InterruptedException {
+	
+	ContinuityPage CP = PageFactory.initElements(driver, ContinuityPage.class);
+	CP.ContinuityPage();
+	CP.CaptureAllContinuityAlarmsColor(driver);
+}}
+	

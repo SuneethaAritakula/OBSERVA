@@ -19,95 +19,149 @@ import org.testng.annotations.Test;
 public class DashboardPage extends BaseTest{
 	
 
-
-	
 			
 	@FindBy (xpath = "//*[@id=\"minimizeSidebar\"]/i[2]")
 	WebElement BulletList;
-	
-	//@Test(priority=0, groups="Smoke Test")
 	
 	public void BulletList()
 	
 	{
 		BulletList.click();
-		}
+		//Actions act = new Actions(driver);
+		//act.click();
+	
+	}
 	
 
-		
-	@FindBy(xpath = "/html/body/div/div[1]/div[2]/ul/li[2]/a/p")
-	WebElement INPUT;
+	@FindBy(xpath = "//*[text()='Dashboard']")
+    WebElement lnkDashBoardPage;
 	
-	//@Test(priority=1, groups="Smoke Test")
-	public void INPUT()
+	@FindBy(xpath = "//a[@class='navbar-brand']['Dashboard']")
+	WebElement hdrDashboardPage;
+	
+	public void lnkDashboardPage()
+	{
+		 lnkDashBoardPage.click();
+		 String actualhdrDashboardPage = hdrDashboardPage.getText();
+		 String expectedhdrDashboardPage = "DASHBOARD";
+		 Assert.assertEquals(actualhdrDashboardPage, expectedhdrDashboardPage);
+		 logger.info(actualhdrDashboardPage);
+	}
+	
+	
+	@FindBy(xpath = "//*[text()='Input']")  
+	WebElement lnkINPUT;
+	
+	@FindBy(xpath= "//a[@class='navbar-brand']['Inputs being monitored']")
+	WebElement hdrInputPage;
+	
+	
+	public void lnkINPUT()
 	
 	{
-	 INPUT.click();
+	 lnkINPUT.click();
+	 String actualhdrInputPage = hdrInputPage.getText();
+	 String expectedhdrInputPage = "INPUTS BEING MONITORED";
+	 Assert.assertEquals(actualhdrInputPage, expectedhdrInputPage);
+	 logger.info(actualhdrInputPage);
 
 	}
 	
-	@FindBy(xpath = "/html/body/div/div[1]/div[2]/ul/li[3]/a/p")
-	WebElement CONTINUITY;
+	@FindBy(xpath = "//*[text()='Continuity']")
+	WebElement lnkCONTINUITY;
 	
-	//@Test(priority=2,groups="Smoke Test")
 	
-	public void CONTINUITY ()
+	@FindBy(xpath= "//a[@class='navbar-brand']['ETI Source Continuity Status']")
+	WebElement hdrContinuityPage;
+    
+			
+	public void lnkCONTINUITY ()
 	
 	{
-	CONTINUITY.click();	
+	lnkCONTINUITY.click();	
+	String actualhdrContinuityPage = hdrInputPage.getText();
+	String expectedhdrContinuityPage = "ETI SOURCE CONTINUITY STATUS";
+	Assert.assertEquals(actualhdrContinuityPage, expectedhdrContinuityPage);
+	logger.info(actualhdrContinuityPage);
 	    
 	}
 	
-	@FindBy(xpath = "/html/body/div/div[1]/div[2]/ul/li[4]/a/p")
-	WebElement CONTENT;
+	@FindBy(xpath = "//*[text()='Content']")
+	WebElement lnkCONTENT;
 	
-	//@Test(priority=3,groups="Smoke Test")
-	public void CONTENT()
+	@FindBy(xpath = "//a[@class='navbar-brand']['Ensemble Content Monitoring']")
+	WebElement hdrContentPage;
+	
+	
+	public void lnkCONTENT()
 	
 	{
-		CONTENT.click();
+		lnkCONTENT.click();
+		String actualhdrContentPage = hdrInputPage.getText();
+		String expectedhdrContentPage = "ENSEMBLE CONTENT MONITORING";
+		Assert.assertEquals(actualhdrContentPage, expectedhdrContentPage);
+		logger.info(actualhdrContentPage);
 	}
 	
-   @FindBy(xpath= "/html/body/div/div[1]/div[2]/ul/li[5]/a/p")
-   WebElement SILENCE;
+   @FindBy(xpath= "//*[text()='Silence']")
+   WebElement lnkSILENCE;
    
-   //@Test(priority=4, groups="Smoke Test")
-   public void SILENCE()
+   @FindBy(xpath = "//a[@class='navbar-brand']['Audio And PAD Silence Monitoring']")
+   WebElement hdrSilencePage;
+   
+
+   public void lnkSILENCE()
    
    {
-	   SILENCE.click();
+	   lnkSILENCE.click();
+	   String actualhdrSilencePage = hdrSilencePage.getText();
+	   String expectedhdrSilencePage = "AUDIO AND PAD SILENCE MONITORING";
+	   Assert.assertEquals(actualhdrSilencePage,expectedhdrSilencePage);
+	   logger.info(actualhdrSilencePage);
    }
    
-   @FindBy (xpath = "/html/body/div/div[1]/div[2]/ul/li[6]/a/p")
-   WebElement EDIOUTPUT;
+   @FindBy (xpath = "//*[text()='EDI Output']")
+   WebElement lnkEDIOUTPUT;
    
-  // @Test(priority=5,groups="Smoke Test")
-   public void EDIOUTPUT()
+   @FindBy(xpath = "//a[@class='navbar-brand']['Outputs being monitored']")
+   WebElement hdrEDIOutputPage;
+   
+
+   public void lnkEDIOUTPUT()
    
    {
 
-	   EDIOUTPUT.click();
+	   lnkEDIOUTPUT.click();
+	   String actualhdrOutputPage = hdrEDIOutputPage.getText();
+	   String expectedhdrOutputPage = "OUTPUTS BEING MONITORED";
+	   Assert.assertEquals(actualhdrOutputPage,expectedhdrOutputPage);
+	   logger.info(actualhdrOutputPage);
    }
    
-   @FindBy(xpath = "/html/body/div/div[1]/div[2]/ul/li[7]/a/p")
-   WebElement RECONFIGURATION;
+   @FindBy(xpath = "//*[text()='Reconfiguration']")
+   WebElement lnkRECONFIGURATION;
    
-   //@Test(priority=6, groups="Smoke Test")
-   public void RECONFIGURATION()
+   @FindBy(xpath = "//a[contains(text(), 'About Us')]")
+   WebElement hdrReconfigPage;
+   
+   public void lnkRECONFIGURATION()
    
    {
-	   RECONFIGURATION.click();
+	   lnkRECONFIGURATION.click();
+	   //String actualhdrReconfigPage = hdrReconfigPage.getText();
+	  // String expectedhdrReconfigPage = "RECONFIGURATION HISTORY";
+	   //Assert.assertEquals(actualhdrReconfigPage,expectedhdrReconfigPage);
+	  // logger.info(actualhdrReconfigPage);
    }
    
   @FindBy(xpath = "//*[@id=\'Version\']")
    WebElement VERSION;
   
- // @Test(priority=7,groups="Smoke Test")
-  
   public void VERSION(){
    
 	 String versionnumber = VERSION.getText();
 	 Assert.assertEquals(versionnumber, "VERSION 1.4.1.40");
+	 logger.info(versionnumber);
 			   
    }
      
@@ -125,78 +179,15 @@ public class DashboardPage extends BaseTest{
 	WebElement Copyright;
 	
 	public void Copyright() {
-		//return Copyright.getText();
-		
 	String copyrightversion = Copyright.getText();
 	Assert.assertEquals(copyrightversion, "© 2019 Factum Radioscape.");
+	logger.info(copyrightversion);
 		
 	}}
 	
 
 
-	
-/*@FindBy (xpath = "//*[@id=\"minimizeSidebar\"]/i[2]")
-WebElement BulletList;
 
-@FindBy(xpath = "/html/body/div/div[1]/div[2]/ul/li[2]/a/p")
-WebElement INPUT;
-
-@FindBy(xpath = "/html/body/div/div[1]/div[2]/ul/li[3]/a/p")
-WebElement CONTINUITY;
-
-
-@FindBy(xpath = "/html/body/div/div[1]/div[2]/ul/li[4]/a/p")
-WebElement CONTENT;
-
-@FindBy(xpath= "/html/body/div/div[1]/div[2]/ul/li[5]/a/p")
-WebElement SILENCE;
-
-@FindBy (xpath = "/html/body/div/div[1]/div[2]/ul/li[6]/a/p")
-WebElement EDIOUTPUT;
-
-@FindBy(xpath = "/html/body/div/div[1]/div[2]/ul/li[7]/a/p")
-WebElement RECONFIGURATION;
-
-@FindBy(xpath = "//*[@id=\'Version\']")
-WebElement VERSION;
-
-@FindBy(xpath="/html/body/div/div[2]/footer/div/nav/ul/li/a")
-WebElement ABOUTUS;
-
-@FindBy (xpath = "//*[@id='copyright']")
-WebElement Copyright;
-
-public void suneetha(WebElement,WebElement,WebElement,WebElement,WebElement,WebElement,WebElement,WebElement) {
-	
-	BulletList.click();
-	INPUT.click();
-	CONTINUITY.click();
-	CONTENT.click();
-	SILENCE.click();
-	EDIOUTPUT.click();
-	RECONFIGURATION.click();
-	VERSION.click();
-	ABOUTUS.click();
-	Copyright.click();
-	
-}*/
-
-	
-	
-	
-	
-			
-
-
-   
-	
-	
-	
-	
-	
-	
-		
-	
 	
 	
 	
