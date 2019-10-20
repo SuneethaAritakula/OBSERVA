@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="OBSERVAMonitor">
@@ -57,3 +58,64 @@
 
 
 
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="OBSERVAMonitor">
+<test name="OBSERVAMonitor">
+<groups>
+<run>
+<include name="Test"/>
+<include name="Smoke Test"/>
+<include name="Regression Test"/>
+</run>
+</groups>
+<classes>
+<class name="com.OBSERVAMonitor.BaseTest">
+<methods>
+<include name="instantiateBrowser"/>
+<include name="loadurl"/>
+</methods>
+</class>
+<class name="com.OBSERVAMonitor.OBSERVADashboardPage">
+<methods>
+<include name="DashboardPage"/>
+<include name="lnksLeftPanel"/>
+<include name="ApplicationFooter"/>
+</methods>
+</class>
+<class name = "com.OBSERVAMonitor.OBSERVAInputPage">
+<methods>
+<include name="InputPage"/>
+<include name="InputPageTitle"/>
+<include name="BulletList"/>
+<include name="SwitchingFrame"/>
+<include name="btnToAddInput"/>
+<include name="SelectInputsFromDropDown"/>
+<include name="SelectInputs"/>
+<include name="EDIInput"/>
+<include name="Continuitypage"/>
+<include name="ContentPage"/>
+<include name="SilencePage"/>
+<include name= "ReconfigPage"/>
+<include name="btnEditInput"/>
+<include name = "lblRenameInput"/>
+</methods>
+</class>
+<class name = "com.OBSERVAMonitor.OBSERVASilencePage">
+<methods>
+<include name="loadurl"/>
+<include name="SilencePage"/>
+<include name="OverallInputAlarms"/>
+<include name="SubComponentAlarms"/>
+<include name="OverallSilenceSettings"/>
+</methods>
+</class>
+</classes>
+</test>
+</suite>
+
+
+
+
+>>>>>>> d66767ae996137ba78ef133cc91db0d9c76f2c90
