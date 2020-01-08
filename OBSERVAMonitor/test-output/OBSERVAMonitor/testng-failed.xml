@@ -12,28 +12,11 @@
     <classes>
       <class name="com.OBSERVAMonitor.OBSERVAInputPage">
         <methods>
-          <include name="lblRenameInput"/>
-          <include name="ContentPage"/>
-          <include name="SilencePage"/>
-          <include name="ReconfigPage"/>
           <include name="instantiateBrowser"/>
-          <include name="btnEditInput"/>
-          <include name="Continuitypage"/>
+          <include name="EDI1"/>
+          <include name="initialize"/>
         </methods>
       </class> <!-- com.OBSERVAMonitor.OBSERVAInputPage -->
-      <class name="com.OBSERVAMonitor.OBSERVASilencePage">
-        <methods>
-          <include name="OverallSilenceSettings"/>
-          <include name="instantiateBrowser"/>
-        </methods>
-      </class> <!-- com.OBSERVAMonitor.OBSERVASilencePage -->
-      <class name="com.OBSERVAMonitor.OBSERVADashboardPage">
-        <methods>
-          <include name="instantiateBrowser"/>
-          <include name="ApplicationFooter"/>
-          <include name="lnksLeftPanel"/>
-        </methods>
-      </class> <!-- com.OBSERVAMonitor.OBSERVADashboardPage -->
     </classes>
   </test> <!-- OBSERVAMonitor(failed) -->
 </suite> <!-- Failed suite [OBSERVAMonitor] -->

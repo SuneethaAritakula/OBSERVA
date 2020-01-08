@@ -1,0 +1,260 @@
+package com.OBSERVAMonitor;
+
+import java.awt.Image;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class ContinuityPage {
+
+	
+	String Red = "rgba(255, 54, 54, 1)";
+	   String Orange = "rgba(255, 178, 54, 1)";
+	   String Green = "rgba(24, 206, 15, 1)";
+	   String Black = "rgba(44, 44, 44, 1)";
+	   String Grey= "rgba(136, 136, 136, 1)";
+	   
+	   @FindBy(xpath = " //*[text()='Continuity']")
+	   WebElement lnkContinuity;
+	
+	// This method is used to click Silent tab on left side panel
+	   public void ContinuityPage() 
+			{
+				
+		   lnkContinuity.click();
+			
+			}
+	   
+	   public void CaptureAllContinuityAlarmsColor(WebDriver driver) throws InterruptedException 
+	   {
+		
+		     String Alarmcolor = null;
+		     List<WebElement> Title = driver.findElements(By.xpath("//*[@class= 'card-title']"));
+		     System.out.println("Total Inputs(alarms) on Continutiy page:"+Title.size());
+		     int Titlesize = Title.size();
+		     for(int i = 0;i<Titlesize;i++)	
+		          {
+			 
+			       String TitleName =  Title.get(i).getText();
+			       System.out.println(TitleName); 
+			       if (i<Titlesize-1) 
+			       		{
+		                  ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", Title.get(i+1));
+		                }
+        			
+		           String strHeart = driver.findElement(By.id("continuity-overall-alarm-"+i)).getAttribute("class");
+		
+					if (strHeart.contains("danger")) 
+					{
+						System.out.println(TitleName + " Overall alarm status - Red");
+						Alarmcolor = "Red";
+					
+					}else if(strHeart.contains("warning")) {
+						
+						System.out.println(TitleName+ " Overall alarm status - Orange");
+						Alarmcolor = "Orange";
+				
+					}
+		          
+				
+				else if(strHeart.contains("success")) 
+				{
+					
+					System.out.println(TitleName +" Overall alarm status - Green");
+					Alarmcolor = "Green";
+					
+	            }
+				else if (strHeart.contains("default")) 
+				{
+					
+					System.out.println(TitleName + " Overall alarm status - Black");
+					Alarmcolor = "Grey";
+							
+				}}}
+	              
+	                		
+	   
+
+
+	 @FindBy(xpath = "//div[starts-with(@id,'continuity-card-0')]//*[@class='table']")
+	 WebElement tblFirstInput;
+
+public void tblFirstInputV(WebDriver driver)
+{
+//List<WebElement> headerrows = tblFirstInput.findElements(By.tagName("thead"));	
+//System.out.println(headerrows);
+//	
+//   System.out.println(headerrows.size());
+//	
+//	for(int i = 0;i<headerrows.size();i++)
+//	{
+
+
+
+       List<WebElement>rows = tblFirstInput.findElements(By.tagName("tr"));	
+	
+	//    System.out.println(rows.size());
+	
+	for(int i = 1;i<rows.size();i++)
+		
+		
+		
+	{
+//		List<WebElement>cols = rows.get(i).findElements(By.tagName("td"));
+		String tdxpath3="//*[@id='continuity-card-1']/div[1]/table/tbody/tr[";
+		String tdxpath4="]/td";
+		List<WebElement>cols=driver.findElements(By.xpath(tdxpath3+i+tdxpath4));
+		System.out.println(cols.size());
+		
+	for(int k = 1; k<=cols.size(); k++)
+	{
+//		String data = cols.get(k).getText();
+	String tdxpath1="//*[@id='continuity-card-1']/div[1]/table/tbody/tr["+i+"]/td[";
+	String tdxpath2="]";
+	String values=driver.findElement(By.xpath(tdxpath1+k+tdxpath2)).getText();
+	if(i==1&&k==3) {
+		System.out.println("frame rate value :: "+ values);
+		System.out.println(frameRate(values));
+	}
+		
+		System.out.print(values+" ");
+	
+}
+	System.out.println();
+	
+	}
+	
+}						
+					
+//11/11/2019(SP)
+
+public void frameStateStatus(WebDriver driver)
+
+{
+
+String InputTitle = driver.findElement(By.xpath("//*[@class= 'card-title']")).getText();
+System.out.println(InputTitle);
+
+String Alarmcolor = null;
+
+//String ContinuityAlarmxpath1 = "//*[@id='continuity-card-0']/div[";
+//String ContinuityAlarmxpath2 = "]/table/tbody/tr[1]/td/i";
+//String ContinuityAlarms = driver.findElement(By.xpath("ContinuityAlarmxpath1+i+ContinuityAlarmxpath2")).getAttribute("class");
+
+String frameRateAlarm = driver.findElement(By.xpath("//*[@id='continuity-card-0']/div[1]/table/tbody/tr[1]/td/i")).getAttribute("class");
+
+if (frameRateAlarm.contains("danger")) 
+{
+	System.out.println("Frame Rate alarm is in - Red");
+	Alarmcolor = "Red";
+
+}else if(frameRateAlarm.contains("warning")) {
+	
+	System.out.println("Frame Rate alarm is in - Orange");
+	Alarmcolor = "Orange";
+
+}
+
+
+else if(frameRateAlarm.contains("success")) 
+{
+
+System.out.println("Frame Rate alarm is in - Green");
+Alarmcolor = "Green";
+
+}
+else if (frameRateAlarm.contains("default")) 
+{
+
+System.out.println("Frame Rate alarm is in - Black");
+Alarmcolor = "Grey";
+
+}
+
+//////List<WebElement> headerrows = tblFirstInput.findElements(By.tagName("thead"));	
+////System.out.println(headerrows);
+////	
+//// System.out.println(headerrows.size());
+////	
+////	for(int i = 0;i<headerrows.size();i++)
+//	{
+//		
+//
+////		String headerxpath1 = "//*[@id='continuity-card-0']/div[1]/table/thead/tr[";
+////		String headerxpath2 = "]";
+		
+List<WebElement>rows = driver.findElements(By.xpath("//*[@id='continuity-card-0']/div[1]/table/tbody/tr"));
+
+//System.out.println(rows.size());
+
+for(int i = 1;i<rows.size();i++)
+		
+{
+	List<WebElement>cols1 = rows.get(i).findElements(By.tagName("td"));
+	String tdxpath3="//*[@id='continuity-card-0']/div[1]/table/tbody/tr[";
+	String tdxpath4="]/td";
+
+	List<WebElement>cols=driver.findElements(By.xpath(tdxpath3+i+tdxpath4));
+	
+
+	//System.out.println("Number of columns::" +  cols.size());
+	
+for(int k = 1; k<=cols.size(); k++)
+{
+////String data = cols.get(k).getText();
+String tdxpath1="//*[@id='continuity-card-0']/div[1]/table/tbody/tr["+i+"]/td[";
+String tdxpath2="]";
+String values=driver.findElement(By.xpath(tdxpath1+k+tdxpath2)).getText();
+if(i==1&&k==3) {
+	System.out.println("frame rate :: "+ values);
+	
+	String header = driver.findElement(By.xpath("//*[@id='continuity-card-0']/div[1]/table/thead/tr[1]")).getText();
+	System.out.println(header);
+	//System.out.println(frameRate(values));
+}
+	
+	System.out.print(values+" ");
+
+}
+System.out.println();
+}
+	
+	
+//String table = driver.findElement(By.xpath("//*[@id= 'continuity-card-0']//div[@class='table-responsive']")).getText(); //prints the text available on the table without the alarms
+//System.out.println(table);
+	
+	
+
+}
+
+public boolean frameRate(String frameRatevalue)
+{
+      boolean frameRateStatus;
+      if(frameRatevalue.equalsIgnoreCase("41.00")||frameRatevalue.equalsIgnoreCase("42.50")) {
+    	  frameRateStatus=true;
+      }
+      else {
+	frameRateStatus=frameRatevalue.matches("41+([.][0-9]+)?|42+([.][0-4][0-9]+)?");
+	 System.out.println("Frame Rate Value is between 41.00 and 42.5::" + frameRatevalue.matches("41+([.][0-9]+)?|42+([.][0-4][0-9]+)"));
+      }
+	return frameRateStatus;
+	
+	}
+
+	
+} 
+
+/*public static void main(String s[]) {
+	String input = "42.50";
+	//System.out.println(input.matches("([0-5][,.]+\\d+(;|$)|[1-6](;|$))"+"\\d$"));
+//	System.out.println(input.matches("41+([.][0-9]+)?|42+([.][0-4][0-9]+)?"));
+	System.out.println(frameRate("41.51"));
+}
+		          
+}	          
+*/		          
+		      

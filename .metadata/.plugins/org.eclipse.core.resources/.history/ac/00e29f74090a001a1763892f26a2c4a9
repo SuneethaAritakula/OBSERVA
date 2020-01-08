@@ -1,0 +1,37 @@
+package com.OBSERVAMonitor;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.Test;
+
+public class OBSERVAContinuityPage extends BaseTest{
+	@Test
+	public void ContinuityPage() throws InterruptedException {
+		
+	int continuityCardNum = 3;
+	int cardNumber = 3;
+	int rowNum =1;
+	
+	ContinuityPage CP = PageFactory.initElements(driver, ContinuityPage.class);
+	CP.lnkContinuityPage();
+	Thread.sleep(5000);
+//CP.CaptureAllContinuityAlarmsColor(driver);
+//	Thread.sleep(5000);
+//	CP.tblFirstInputV(driver, continuityCardNum);
+//CP.inputStreamStatusV(driver,continuityCardNum); //this method captures current status with color and name of alarms per input basis. works well
+//	CP.inputStreamStatusS(driver,continuityCardNum, continuityCardNum);
+	CP.inputStatusalarams(driver,cardNumber,rowNum);
+	
+//	CP.frameRate("'42.5");
+}}
+
+//div[@class='col-3'][1]//*[@class='btn btn-default btn-fab btn-icon btn-round btn-configedit-overall pull-right']//i[@class='fas fa-cog']//div[contains(., 'All')][2]
+
+//section[@id='mysection']/descendant::a[2]
+
+           

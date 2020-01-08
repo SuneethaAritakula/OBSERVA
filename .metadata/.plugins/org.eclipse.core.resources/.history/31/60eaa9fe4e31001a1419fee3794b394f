@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="OBSERVAMonitor">
+	<test name="OBSERVAMonitor">
+		<groups>
+			<run>
+				<include name="Test" />
+				<include name="Smoke Test" />
+				<include name="Regression Test" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.OBSERVAMonitor.BaseTest">
+				<methods>
+					<include name="instantiateBrowser" />
+					<include name="initialize"/>
+				</methods>
+			</class>
+			<class name="com.OBSERVAMonitor.OBSERVADashboardPage">
+				<methods>
+					<!-- <include name="dashboardPage" /> -->
+					<!-- <include name="elinksLeftPanel" /> -->
+					<!-- <include name="footerApplication" /> -->
+				</methods>
+			</class>
+			<class name="com.OBSERVAMonitor.OBSERVAInputPage">
+				<methods>
+
+					<include name="Continuitypage" />
+					<include name="ContentPage" />
+					<include name="SilencePage" />
+					<include name="ReconfigPage" />
+					<include name="EDI1"/>
+					<include name="EDI2"/>
+					<include name="EDI3"/>
+					<include name="EDI4"/>
+					<include name="EDI5"/>
+					<include name="EDI6"/>
+					<include name="EDI7"/>
+					<include name="RFInput1"/>
+					<include name="RFInput2"/>
+					<include name="FEP1"/>
+					<include name="FEP2"/>
+					<include name="FEP3"/>
+					<include name="FEP4"/>
+					<include name="FEP5"/>
+					<include name="FEP6"/>
+					<include name="FEP7"/>
+					<include name="ETINI1"/>
+					<include name="ETINI2"/>
+					<include name="ETINI3"/>
+					<include name="RadioscapeETICCard0"/>
+					<include name="RadioscapeETICCard1"/>
+					<!-- <include name="txtError"/>
+					<include name="btnEditInput" />
+					<include name="lblRenameInput" /> --> 
+					
+					
+					
+					
+					
+				</methods>
+			</class>
+			<class name="com.OBSERVAMonitor.OBSERVASilencePageOriginal">
+				<methods>
+					<!-- <include name="OverallInputAlarms" /> -->
+					<!-- <include name="OverallSilenceSettings" /> -->
+							</methods>
+			</class>
+		</classes>
+	</test>
+</suite>
+
+
+
+

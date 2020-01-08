@@ -1,0 +1,101 @@
+package com.OBSERVAMonitor;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.Test;
+
+public class OBSERVASilencePage extends BaseTest {
+	
+//	@Test (groups = "Regression Test")	
+	
+	public void SilencePage() throws InterruptedException { 
+	
+	SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+	logger.info("SilencePage launched successfully");
+	
+	SP.SilencePageLeftTab();
+	Thread.sleep(1000);
+	int index = 0;
+		
+// SP.AudioSubComponentAlarms(driver, index); //stale element exception
+// SP.PADSubComponentAlarms(driver, index); //stale element exception
+// SP.AudioSubComponentsColors(driver, index); //stale element exception
+// SP.AudioSubComponentsColorsandStats(driver, index); //java.lang.ArrayIndexOutOfBoundsException: -1 when run in this method
+	
+	}
+	
+	//@Test (groups = "Regression Test")
+	public void OverallInputAlarms() throws InterruptedException {
+	
+	SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+	Thread.sleep(5000);
+	SP.SilencePageLeftTab();
+	Thread.sleep(2000);
+
+   int index = 0;
+// SP.CaptureAllSilenceAlarmsColor(driver, index); // java.lang.ArrayIndexOutOfBoundsException: -1
+//	SP.captureSilenceAlarmComponents(driver, 0); //works well
+	}
+	
+//	@Test (groups = "Regression Test")
+	public void SubComponentAlarms() throws InterruptedException {
+		
+	SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+	Thread.sleep(1000);
+
+	int index = 1;
+	SP.SilencePageLeftTab();
+
+//  SP.AudioSubComponentsColors1(driver, index);//stale element exception
+//	SP.AudioSubComponentAlarms(driver, index); //works well
+//	SP.PADSubComponentAlarms(driver, index);//works well
+//	SP.DATASubComponentAlarms(driver, index);//works well
+//  SP.AudioSubComponentsColorsandStats(driver, index);//works well
+//	SP.padSubComponentsColorsandStats(driver,index); //works well
+//	SP.dataSubComponentsColorsandStats(driver,index);//works well
+	
+
+	}	
+	
+@Test (groups = "Regression Test")
+	public void OverallSilenceSettings() throws InterruptedException {
+	int index = 1;
+		
+		SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+		Thread.sleep(1000);
+		SP.SilencePageLeftTab();
+	
+
+      SP.silencePageInputsAndAlarms(driver);
+
+
+	}
+	
+	//@Test (groups = "Regression Test")	
+	public void individualSilenceSettings() throws InterruptedException {
+		int index = 1;
+			
+			SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+			Thread.sleep(1000);
+			SP.SilencePageLeftTab();
+	//SP.individualSilenceSettings(driver, index);
+	//SP.individualPADSilenceSettings(driver, index);
+//			SP.OverallDATASilenceSettings(driver, index);
+//			SP.dataSubComponentsColorsandStats(driver,index);
+//			SP.CaptureAllSilenceAlarmsColor(driver,index);
+//			
+//		 	OverallAudioSilenceSettings(driver,3); -- 
+//		   	AudioSubComponentsColorsandStats(driver,i);
+//		   	OverallPADSilenceSettings(driver,i);
+//		   	padSubComponentsColorsandStats(driver,i);
+////		   	padSubComponentsColorsandStats2(driver,i);
+//		   	OverallDATASilenceSettings(driver,i);
+//		   	dataSubComponentsColorsandStats(driver,i);
+//		   	CaptureAllSilenceAlarmsColor(driver,i);
+		   	
+		
+	}}
+		
+
+	

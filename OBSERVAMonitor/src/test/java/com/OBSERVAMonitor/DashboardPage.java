@@ -7,6 +7,7 @@ import javax.swing.Action;
 
 import org.apache.poi.Version;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -20,7 +21,7 @@ public class DashboardPage extends BaseTest{
 	
 
 			
-	@FindBy (xpath = "//*[@id=\"minimizeSidebar\"]/i[2]")
+	@FindBy (xpath = "//*[@id='minimizeSidebar']")
 	WebElement BulletList;
 	
 	public void BulletList()
@@ -79,7 +80,7 @@ public class DashboardPage extends BaseTest{
 	
 	{
 	lnkCONTINUITY.click();	
-	String actualhdrContinuityPage = hdrInputPage.getText();
+	String actualhdrContinuityPage = hdrContinuityPage.getText();
 	String expectedhdrContinuityPage = "ETI SOURCE CONTINUITY STATUS";
 	Assert.assertEquals(actualhdrContinuityPage, expectedhdrContinuityPage);
 	logger.info(actualhdrContinuityPage);
@@ -141,49 +142,61 @@ public class DashboardPage extends BaseTest{
    @FindBy(xpath = "//*[text()='Reconfiguration']")
    WebElement lnkRECONFIGURATION;
    
-   @FindBy(xpath = "//a[contains(text(), 'About Us')]")
+   @FindBy(xpath = "//a[contains(text(), 'Reconfiguration History')]")
    WebElement hdrReconfigPage;
    
    public void lnkRECONFIGURATION()
    
    {
 	   lnkRECONFIGURATION.click();
-	   //String actualhdrReconfigPage = hdrReconfigPage.getText();
-	  // String expectedhdrReconfigPage = "RECONFIGURATION HISTORY";
-	   //Assert.assertEquals(actualhdrReconfigPage,expectedhdrReconfigPage);
-	  // logger.info(actualhdrReconfigPage);
+	   String actualhdrReconfigPage = hdrReconfigPage.getText();
+	   String expectedhdrReconfigPage = "RECONFIGURATION HISTORY";
+	   Assert.assertEquals(actualhdrReconfigPage,expectedhdrReconfigPage);
+	   logger.info(expectedhdrReconfigPage);
    }
    
-  @FindBy(xpath = "//*[@id=\'Version\']")
+  @FindBy(xpath = "//*[@id='Version']")
    WebElement VERSION;
   
   public void VERSION(){
+	  
+	  JavascriptExecutor executor = (JavascriptExecutor)driver;
+   	  executor.executeScript("arguments[0].scrollIntoView(true);", VERSION);
+   	  executor.executeScript("arguments[0].click();", VERSION);
    
 	 String versionnumber = VERSION.getText();
-	 Assert.assertEquals(versionnumber, "VERSION 1.4.1.40");
+	 Assert.assertEquals(versionnumber, "VERSION 1.4.1.63");
 	 logger.info(versionnumber);
 			   
    }
-     
-      
-	@FindBy(xpath="/html/body/div/div[2]/footer/div/nav/ul/li/a")
-	WebElement ABOUTUS;
-    public void ABOUTUS() {
-		
-	
-	ABOUTUS.click();
-    }
-
-	
-	@FindBy (xpath = "//*[@id='copyright']")
+  
+  @FindBy (xpath = "//*[@id='copyright']")
 	WebElement Copyright;
 	
 	public void Copyright() {
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+	   	  executor.executeScript("arguments[0].scrollIntoView(true);", Copyright);
 	String copyrightversion = Copyright.getText();
 	Assert.assertEquals(copyrightversion, "© 2019 Factum Radioscape.");
 	logger.info(copyrightversion);
+  
+	}
+  
+           
+	@FindBy(xpath="//*[contains(text(),'About Us')]")
+	WebElement ABOUTUS;
+    public void ABOUTUS() {
 		
-	}}
+    	 JavascriptExecutor executor = (JavascriptExecutor)driver;
+   	  executor.executeScript("arguments[0].scrollIntoView(true);", ABOUTUS);
+   	  executor.executeScript("arguments[0].click();", ABOUTUS);
+//	ABOUTUS.click();
+    }
+
+	
+
+		
+	}
 	
 
 

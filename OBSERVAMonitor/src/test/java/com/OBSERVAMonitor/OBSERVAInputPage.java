@@ -1,177 +1,353 @@
 package com.OBSERVAMonitor;
 
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.util.Map;
 
-import org.apache.log4j.PropertyConfigurator;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
-
-import junit.framework.Assert;
 
 public class OBSERVAInputPage extends BaseTest {
 	
-	
-	@Test (groups = "Regression Test", priority = 1)
-	
-	public void InputPage() throws InterruptedException, IOException
-	{
-	InputPage IP = PageFactory.initElements(driver, InputPage.class);
-		
-	IP.INPUT();
+/*	@Test(groups = "Regression Test")
+
+	public void lnkInput() {
+
+		InputPage IP = PageFactory.initElements(driver, InputPage.class);
+		IP.INPUT();
 	}
-	
-	@Test (groups = "Regression Test", priority = 3)
-	public void InputPageTitle() throws InterruptedException{
-		
-	InputPage IP = PageFactory.initElements(driver, InputPage.class);
-			
-	IP.PageTitle();
+
+	@Test (groups = "Regression Test")
+
+	public void btnToAddInput() throws InterruptedException{
+
+		InputPage IP = PageFactory.initElements(driver, InputPage.class);
+		Thread.sleep(1000);
+		IP.btnToAddInput();
+
+
 	}
+
+	@Test (groups = "Regression Test")
+
+	public void SelectInputsFromDropDown() throws InterruptedException {
+
+		InputPage IP = PageFactory.initElements(driver, InputPage.class);
+		Thread.sleep(1000);
+		IP.SelectInputsFromDropDown();
+
+	}
+    
+	@Test (groups = "Regression Test")
 	
-	
-	/*@Test (groups = "Regression Test", priority = 0)
-	public void BulletList() throws InterruptedException{
-		
-	InputPage IP = PageFactory.initElements(driver, InputPage.class);
-		
-	IP.BulletList();
-	
+	public void SelectInputs() throws InterruptedException{
+
+		InputPage IP = PageFactory.initElements(driver, InputPage.class);
+		Thread.sleep(1000);
+		IP.SelectInputs();
 	}*/
-	
-	
-	@Test (groups = "Smoke Test", priority = 2)
-	
-	public void SwitchingFrame() throws InterruptedException{
-		
-	InputPage IP = PageFactory.initElements(driver, InputPage.class);
-				
-	//IP.SwitchingFrame().click();
-    Thread.sleep(4000);
-	}
-	
-	@Test (groups = "Regression Test", priority= 4)
-		
-    public void btnToAddInput() throws InterruptedException{
-		
-    InputPage IP = PageFactory.initElements(driver, InputPage.class);
-	
-    IP.btnToAddInput();
-	Thread.sleep(1000);
-	
-    }
-	
-	@Test (groups = "Regression Test", priority=5)
-	
-    public void SelectInputsFromDropDown() throws InterruptedException{
-		
-    InputPage IP = PageFactory.initElements(driver, InputPage.class);
-	IP.SelectInputsFromDropDown();
-	
-    }
     
-	@Test (groups = "Regression Test", priority=6)
-	
-    public void SelectInputs() throws InterruptedException{
-		
-    InputPage IP = PageFactory.initElements(driver, InputPage.class);
-	IP.SelectInputs();
-    }
-    
-		/*Select Input = new Select(driver.findElement(By.xpath("//*[@id=\'select_sourceType\']")));
+    /*Select Input = new Select(driver.findElement(By.xpath("//*[@id=\'select_SourceType\']")));
 		Input.selectByIndex(0);
-		
+
 		for (int i = 0; i<=5; i++)
-			
+
 		{
-			
+
 			CommonMethods.readandwritedata(driver, "");
-			
-			
+
+
 		}
 		//Input.selectByVisibleText("FEP");
 		//Thread.sleep(500);
-		
+
 		FileInputStream file = new FileInputStream("");
 		XSSFWorkbook workbook = new XSSFWorkbook(file);
 		XSSFSheet sheet = workbook.getSheet("");*/
 		
-	@Test (groups = "Smoke Test",priority = 7)
-	 public void EDIInput() throws InterruptedException{
-		
-	 InputPage IP = PageFactory.initElements(driver, InputPage.class);
-	 IP.EDIInput();
-		
-	 }
-	    
-	 //IP.InputExistsError();
-	 //IP.txtError();
-	 //String expectedText = "Error!ETI Source E:224.1.0.46:10046 already exists";
-	 //String txtError ();
-	 //Assert.assertEquals(expectedText, txtError);
+
 	
-	@Test(priority = 8)
+	@Test
+	public void EDI1() {
+		InputPage IP = PageFactory.initElements(driver, InputPage.class);
+
+		IP.INPUT();
+		IP.btnToAddInput();
+		Map<String, String> testData = excelReader.getRowFromMap("EDI1");
+		IP.EDIInputs(driver, testData.get("DisplayName"), testData.get("Address"), testData.get("Port"),
+				testData.get("SourceType"));
+
+	}
+	
+	 @Test
+	public void EDI2() {
+		InputPage IP = PageFactory.initElements(driver, InputPage.class);
+
+		IP.INPUT();
+		IP.btnToAddInput();
+		Map<String, String> testData = excelReader.getRowFromMap("EDI2");
+		IP.EDIInputs(driver, testData.get("DisplayName"), testData.get("Address"), testData.get("Port"),
+				testData.get("SourceType"));
+
+	}
+
+	@Test
+	public void EDI3() {
+		InputPage IP = PageFactory.initElements(driver, InputPage.class);
+		IP.INPUT();
+		IP.btnToAddInput();
+
+		Map<String, String> testData = excelReader.getRowFromMap("EDI3");
+
+		IP.EDIInputs(driver, testData.get("DisplayName"), testData.get("Address"), testData.get("Port"),
+				testData.get("SourceType"));
+
+	}
+
+
+   @Test
+
+	public void EDI4() {
+		InputPage IP = PageFactory.initElements(driver, InputPage.class);
+
+		Map<String, String> testData = excelReader.getRowFromMap("EDI4");
+		IP.INPUT();
+		IP.btnToAddInput();
+		IP.EDIInputs(driver, testData.get("DisplayName"), testData.get("Address"), testData.get("Port"),
+				testData.get("SourceType"));
+
+	}
+
+    @Test
+
+	public void EDI5() {
+		InputPage IP = PageFactory.initElements(driver, InputPage.class);
+
+		Map<String, String> testData = excelReader.getRowFromMap("EDI5");
+		IP.INPUT();
+		IP.btnToAddInput();
+		IP.EDIInputs(driver, testData.get("DisplayName"), testData.get("Address"), testData.get("Port"),
+				testData.get("SourceType"));
+
+	}
+
+	@Test
+
+	public void EDI6() {
+
+		InputPage IP = PageFactory.initElements(driver, InputPage.class);
+		Map<String, String> testData = excelReader.getRowFromMap("EDI6");
+		IP.INPUT();
+		IP.btnToAddInput();
+		IP.EDIInputs(driver, testData.get("DisplayName"), testData.get("Address"), testData.get("Port"),
+				testData.get("SourceType"));
+
+	}
+	
+	@Test
+
+	public void EDI7() {
+
+		InputPage IP = PageFactory.initElements(driver, InputPage.class);
+		Map<String, String> testData = excelReader.getRowFromMap("EDI7");
+		IP.INPUT();
+		IP.btnToAddInput();
+		IP.EDIInputs(driver, testData.get("DisplayName"), testData.get("Address"), testData.get("Port"),
+				testData.get("SourceType"));
+
+	}
+	
+	
+
+	
+	@Test
+	public void RFInput1() throws InterruptedException {
+		InputPage IP = PageFactory.initElements(driver, InputPage.class);
+		Map<String, String> testData = excelReader.getRowFromMap("RFInput1");
+		if (testData != null) {
+			IP.INPUT();
+			IP.RFInputs(driver, testData.get("DisplayName"), testData.get("Frequency"), testData.get("SourceType"));
+		} else {
+			System.out.println("Please mark testcase as Yes in testData excelsheeet");
+		}
+
+	}
+
+@Test
+public void RFInput2() throws InterruptedException {
+	InputPage IP = PageFactory.initElements(driver, InputPage.class);
+	Map<String,String> testData = excelReader.getRowFromMap("RFInput2");
+	IP.INPUT();
+	IP.RFInputs(driver,testData.get("DisplayName"),testData.get("Frequency"),testData.get("SourceType"));
+	
+}
+
+@Test
+public void FEP1() throws InterruptedException {
+InputPage IP = PageFactory.initElements(driver, InputPage.class);
+Map<String, String> testData = excelReader.getRowFromMap("FEP1");
+IP.INPUT();
+IP.FEPInputs(driver,testData.get("DisplayName"),testData.get("Address"),testData.get("Port"),testData.get("SourceType"));
+}
+
+@Test
+public void FEP2() throws InterruptedException {
+InputPage IP = PageFactory.initElements(driver, InputPage.class);
+Map<String, String> testData = excelReader.getRowFromMap("FEP2");
+IP.INPUT();
+IP.FEPInputs(driver,testData.get("DisplayName"),testData.get("Address"),testData.get("Port"),testData.get("SourceType"));
+
+}
+
+@Test
+public void FEP3() throws InterruptedException {
+InputPage IP = PageFactory.initElements(driver, InputPage.class);
+Map<String, String> testData = excelReader.getRowFromMap("FEP3");
+IP.INPUT();
+IP.FEPInputs(driver,testData.get("DisplayName"),testData.get("Address"),testData.get("Port"),testData.get("SourceType"));
+
+}
+
+@Test
+public void FEP4() throws InterruptedException {
+InputPage IP = PageFactory.initElements(driver, InputPage.class);
+Map<String, String> testData = excelReader.getRowFromMap("FEP4");
+IP.INPUT();
+IP.FEPInputs(driver,testData.get("DisplayName"),testData.get("Address"),testData.get("Port"),testData.get("SourceType"));
+
+}
+
+@Test
+public void FEP5() throws InterruptedException {
+InputPage IP = PageFactory.initElements(driver, InputPage.class);
+Map<String, String> testData = excelReader.getRowFromMap("FEP5");
+IP.INPUT();
+IP.FEPInputs(driver,testData.get("DisplayName"),testData.get("Address"),testData.get("Port"),testData.get("SourceType"));
+}
+
+@Test
+public void FEP6() throws InterruptedException {
+InputPage IP = PageFactory.initElements(driver, InputPage.class);
+Map<String, String> testData = excelReader.getRowFromMap("FEP6");
+IP.INPUT();
+IP.FEPInputs(driver,testData.get("DisplayName"),testData.get("Address"),testData.get("Port"),testData.get("SourceType"));
+
+}
+
+@Test
+public void FEP7() throws InterruptedException {
+InputPage IP = PageFactory.initElements(driver, InputPage.class);
+Map<String, String> testData = excelReader.getRowFromMap("FEP7");
+IP.INPUT();
+IP.FEPInputs(driver,testData.get("DisplayName"),testData.get("Address"),testData.get("Port"),testData.get("SourceType"));
+
+}
+
+
+@Test
+public void ETINI1() throws InterruptedException {
+InputPage IP = PageFactory.initElements(driver, InputPage.class);
+Map<String, String> testData = excelReader.getRowFromMap("ETINI1");
+IP.INPUT();
+IP.ETINIInputs(driver,testData.get("DisplayName"),testData.get("FilePath"),testData.get("SourceType"));
+
+}
+
+@Test
+public void ETINI2() throws InterruptedException {
+InputPage IP = PageFactory.initElements(driver, InputPage.class);
+Map<String, String> testData = excelReader.getRowFromMap("ETINI2");
+IP.INPUT();
+IP.ETINIInputs(driver,testData.get("DisplayName"),testData.get("FilePath"),testData.get("SourceType"));
+
+}
+
+
+@Test
+public void ETINI3() throws InterruptedException {
+InputPage IP = PageFactory.initElements(driver, InputPage.class);
+Map<String, String> testData = excelReader.getRowFromMap("ETINI3");
+IP.INPUT();
+IP.ETINIInputs(driver,testData.get("DisplayName"),testData.get("FilePath"),testData.get("SourceType"));
+
+}
+
+@Test
+public void RadioscapeETICCard0() throws InterruptedException {
+InputPage IP = PageFactory.initElements(driver, InputPage.class);
+Map<String, String> testData = excelReader.getRowFromMap("RadioscapeETICCard0");
+IP.INPUT();
+IP.ETIC(driver,testData.get("DisplayName"),testData.get("InputStream"),testData.get("SourceType"));
+}
+
+//-----------------------------------------------------------------------------------------------------------------------//
+	
+	//@Test
+	 public void txtError() throws InterruptedException{
+	 InputPage IP = PageFactory.initElements(driver, InputPage.class);
+	 Thread.sleep(1000);
+	 //IP.InputExistsError();
+	 IP.txtError();
+	 
+	}
+	
+	@Test(priority = 11)
 	 
 	 public void Continuitypage() throws InterruptedException{
-		Thread.sleep(1000);
+		
 			
 		 InputPage IP = PageFactory.initElements(driver, InputPage.class);
+		 Thread.sleep(1000);
 			
 		 IP.Continuitypage();
 		 
 		 }
 	
-	@Test(priority = 9)
+	@Test(priority = 12)
 	 
 	 public void ContentPage() throws InterruptedException{
-		Thread.sleep(1000);
+		
 			
 		 InputPage IP = PageFactory.initElements(driver, InputPage.class);
-			
+		 Thread.sleep(1000);
 		 IP.ContentPage();
 		 
 		 }
 	
-	@Test(priority = 10)
+	@Test(priority = 13)
 		
 	 public void SilencePage() throws InterruptedException{
-		Thread.sleep(1000);
-	 InputPage IP = PageFactory.initElements(driver, InputPage.class);
 		
+	 InputPage IP = PageFactory.initElements(driver, InputPage.class);
+	 Thread.sleep(1000);
 		IP.SilencePage();
 	 }
 		
-	@Test(priority = 11)
+	@Test(priority = 14)
 	
 	 public void ReconfigPage() throws InterruptedException{
-		Thread.sleep(1000);
+		
 			
 	 InputPage IP = PageFactory.initElements(driver, InputPage.class);
-		
+	 Thread.sleep(1000);
 		IP.ReconfigPage();
 	}
 		
-	@Test(priority = 12)
+//	@Test(priority = 14)
 	public void btnEditInput() throws InterruptedException {
-		Thread.sleep(1000);
+		
 	InputPage IP = PageFactory.initElements(driver, InputPage.class);
-	
+	Thread.sleep(1000);
 	IP.btnEditInput();
 	
 	}
 	
-	@Test(priority = 13)
+//	@Test(priority = 15)
 	public void lblRenameInput() throws InterruptedException {
-	Thread.sleep(1000);
 	InputPage IP = PageFactory.initElements(driver, InputPage.class);
-	
+	Thread.sleep(1000);
 	IP.lblRenameInput();
 	
+	driver.navigate().back();
+	driver.navigate().refresh();
 	}}
 	
 	

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="OBSERVAMonitor">
+	<test name="OBSERVAMonitor">
+		<groups>
+			<run>
+				<include name="Test" />
+				<include name="Smoke Test" />
+				<include name="Regression Test" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.OBSERVAMonitor.BaseTest">
+				<methods>
+					<include name="instantiateBrowser" />
+					<include name="loadurl" />
+				</methods>
+			</class>
+			<class name="com.OBSERVAMonitor.OBSERVADashboardPage">
+				<methods>
+					<!-- <include name="dashboardPage" /> -->
+					<include name="elinksLeftPanel" />
+					<!-- <include name="footerApplication" /> -->
+				</methods>
+			</class>
+			<class name="com.OBSERVAMonitor.OBSERVAInputPage">
+				<methods>
+<!-- 					<include name="InputPage" />
+					<include name="InputPageTitle" />
+					<include name="BulletList" />
+					<include name="SwitchingFrame" />
+					<include name="btnToAddInput" />
+					<include name="SelectInputsFromDropDown" />
+					<include name="SelectInputs" />
+					<include name="EDIInput" />
+					<include name="txtError"/>
+					<include name="Continuitypage" />
+					<include name="ContentPage" />
+					<include name="SilencePage" />
+					<include name="ReconfigPage" />
+					<include name="btnEditInput" />
+					<include name="lblRenameInput" /> -->
+				</methods>
+			</class>
+			<class name="com.OBSERVAMonitor.OBSERVASilencePage">
+				<methods>
+					<include name="CapturingAudioPADDATAAlarmsColor" />
+					<!-- <include name="silencePageInputsAndAlarms" /> -->
+					<include name=""/>
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>
+
+
+
+

@@ -1,20 +1,117 @@
 package com.OBSERVAMonitor;
 
+import java.util.List;
+import java.util.Map;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
 public class OBSERVAContinuityPage extends BaseTest{
-	@Test
-	public void ContinuityPage() throws InterruptedException {
 	
+//	@Test (groups = "Regression Test")//This method clicks on the continuity link on the left panel
+	
+	public void ContinuityPage() throws InterruptedException {
 	ContinuityPage CP = PageFactory.initElements(driver, ContinuityPage.class);
-	CP.ContinuityPage();
+		
+	CP.lnkContinuityPage();
 	Thread.sleep(5000);
-	//CP.CaptureAllContinuityAlarmsColor(driver);
-	Thread.sleep(5000);
-	CP.tblFirstInput();
-}}
+		
+	}
+	
+//	@Test(groups = "Regression Test")// This method captures the Titles of the inputs
+	
+	public void Titles() {
+	ContinuityPage CP = PageFactory.initElements(driver, ContinuityPage.class);
+		
+//		int cardNumber = 0;
+//		CP.Titles(driver, cardNumber);
+	}
+	
+ // @Test(groups = "Regression Test")// this method captures all input titles and overall heart symbol alarm but does not validate with the rest of the alarms within that input
+	public void TitleandHeartSymbolAlarmcolour() throws InterruptedException {
+	ContinuityPage CP = PageFactory.initElements(driver, ContinuityPage.class);
+		
+	CP.lnkContinuityPage();
+	CP.TitleandHeartSymbolAlarmcolour(driver);
+	
+	}
+	
+ @Test (groups = "Regression Test") // this method captures the first table, stats and alarms along with Frame rate validation
+	public void tblFirstInputW() throws InterruptedException {
+	ContinuityPage CP = PageFactory.initElements(driver, ContinuityPage.class);
+	Map<String, String> testData = excelReader.getRowFromMap("tblFirstInputW");
+	
+//	int continuityCardNum = 0;
+	
+	CP.lnkContinuityPage();
+	CP.tblFirstInputW(driver, testData.get("CardNumber")); //input title is iterating as inputstatus alamrs method is called inside the loop for the alarm colors and statistics to be captured.
+	
+	//This method calls the below methods
+   //	CP.Titles(driver, cardNumber);
+   //	inputStatusalarams(driver, cardNumber, row);
+	
+	}
+	
+	@Test (groups = "Regression Test") //this method captures current alarms specific to the input incl individual alarms and name and validating it with the overall alarm. works well
+	public void inputStreamStatusV() throws InterruptedException {
+	ContinuityPage CP = PageFactory.initElements(driver, ContinuityPage.class);
+	Map<String, String> testData = excelReader.getRowFromMap("inputStreamStatusV");
+	
+//	int cardNumber = 3;
+	
+	CP.lnkContinuityPage();
 
-//div[@class='col-3'][1]//*[@class='btn btn-default btn-fab btn-icon btn-round btn-configedit-overall pull-right']//i[@class='fas fa-cog']//div[contains(., 'All')][2]
+	CP.inputStreamStatusV(driver,testData.get("CardNumber")); //this method captures current alarms specific to the input incl individual alarms and name and validating it with the overall alarm. works well
+	}
+		
+		
+		
+//	@Test
+	public void inputStatusalarams() throws InterruptedException {
+	ContinuityPage CP = PageFactory.initElements(driver, ContinuityPage.class);
+		
+	int cardNumber = 3;
+	int rowNum =1;
+	
+//	CP.inputStatusalarams(driver,cardNumber,rowNum);//this method provides current status based on specific input and specific row. When this method is called in tblSpecificInputs, will need to pass the parameters as CradNum and rowNum - works well
+		
+	}
+	
+	//@Test
+	public void frameRate() {
+	ContinuityPage CP = PageFactory.initElements(driver, ContinuityPage.class);
+		
+	CP.frameRate("'42.5");
+		
+	}}
+		
+		
+		
+		
+		
+		
 
-//section[@id='mysection']/descendant::a[2]
+		/*int continuityCardNum = 3;
+		int cardNumber = 3;
+		int rowNum =1;
+
+		ContinuityPage CP = PageFactory.initElements(driver, ContinuityPage.class);
+		CP.lnkContinuityPage();
+		Thread.sleep(5000);
+		//CP.CaptureAllContinuityAlarmsColor(driver);
+
+		//	Thread.sleep(5000);
+		//	CP.tblFirstInputV(driver, continuityCardNum);
+		//CP.inputStreamStatusV(driver,continuityCardNum); //this method captures current status with color and name of alarms per input basis. works well
+		//	CP.inputStreamStatusS(driver,continuityCardNum, continuityCardNum);
+		CP.inputStatusalarams(driver,cardNumber,rowNum); //this method provides current status absed on specific input and specific row. When this method is called in tblSpecificInputs, will need to pass the parameters as CradNum and rowNum - works well
+		CP.frameRate("'42.5");*/
+	
+
+
+
+           

@@ -1,0 +1,110 @@
+package com.OBSERVAMonitor;
+
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.Test;
+
+public class OBSERVASilencePage extends BaseTest {
+	
+//	@Test (groups = "Regression Test")	
+	
+	public void SilencePage() throws InterruptedException { 
+	
+	SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+	logger.info("SilencePage launched successfully");
+	
+	SP.SilencePageLeftTab();
+	Thread.sleep(1000);
+	int index = 0;
+			
+ SP.AudioSubComponentAlarms(driver, index); //This method captures left and right alarms for audio services for a given input. works well
+ //SP.PADSubComponentAlarms(driver, index); ////This method captures left and right alarms for audio services for a given input. works well
+//	SP.DATASubComponentAlarms(driver, index);//works well
+ //SP.AudioSubComponentsColors(driver, index); //stale element exception
+
+	
+	}
+	
+//	@Test (groups = "Regression Test")
+	public void OverallInputAlarms() throws InterruptedException {
+	
+	SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+	Thread.sleep(5000);
+	SP.SilencePageLeftTab();
+	Thread.sleep(2000);
+
+   int index = 0;
+// SP.CaptureAllSilenceAlarmsColor(driver, index); // java.lang.ArrayIndexOutOfBoundsException: -1
+//	SP.captureSilenceAlarmComponents(driver, 0); //works well
+	}
+	
+	@Test (groups = "Regression Test")
+	public void SubComponentAlarms() throws InterruptedException {
+		
+	SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+	Thread.sleep(1000);
+
+	int index = 1;
+	SP.SilencePageLeftTab();
+
+ // SP.AudioLeftandRightStatsAlarmsAndText(driver, index);//works well
+// SP.PADSubComponentsText(driver, index); //works well.Captures service names of pad subcomponents for 1 input at a time.
+//	SP.DataSubComponentsLeftandRightAlarmsAndText(driver, index);// capturing number of inputs but not the service name
+	SP.AudioSubComponentAlarms(driver, index); //works well
+//	SP.PADSubComponentAlarms(driver, index);//works well
+//	SP.DATASubComponentAlarms(driver, index);//works well
+// SP.AudioSubComponentsColorsandStatsV(driver, index);//works well.Only captures audio sub component alarm numbers and colours of one input at a time. No title captured but works well insilencePageInputsAndAlarms 
+// SP.AudioSubComponentsColorsandStatsS(driver, index);////Only captures alarm colours. Name of services is not captured. Throws stale element exception
+// SP.AudioSubComponentsColorsandStats(driver, index); //captures overall audio alarm and number of audio services and corresponding alarms. Title is not captured.
+//	SP.padSubComponentsColorsandStats(driver,index); //with sleep - null pointer exception. without sleep overallpad alarm doesn't match with individual pad alarms
+//	SP.dataSubComponentsColorsandStats(driver,index);//Only captures pad sub component alarm colours of one input at a time only with thread.sleep which doesn't work wee when run with overallSilenceSettings method
+
+	}	
+	
+	
+//The below method captures Inputs,alarms incl sub components for all the inputs available	
+	
+//@Test (groups = "Regression Test")
+	public void OverallSilenceSettings() throws InterruptedException {
+	int index = 1;
+//	Map<String, String> testData = excelReader.getRowFromMap("OverallSilenceSettings");
+		SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+		Thread.sleep(1000);
+		SP.SilencePageLeftTab();
+
+
+      SP.silencePageInputsAndAlarms(driver);
+ 
+
+
+	}
+	
+//@Test (groups = "Regression Test")	
+	public void individualSilenceSettings() throws InterruptedException {
+		int index = 1;
+			
+			SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+			Thread.sleep(1000);
+			SP.SilencePageLeftTab();
+// SP.individualSilenceSettings(driver, index);//works well. Captures Input Title, sub component individual and overall alarms and verifies the alarms with the heart symbol
+// SP.individualPADSilenceSettings(driver, index);//works well
+// SP.OverallDATASilenceSettings(driver, index);// captures only 1 alarm when there is data. If DATA is grey takes a long time to execute
+// SP.dataSubComponentsColorsandStats(driver,index);//works well. Captures info of only 1 input
+// SP.CaptureAllSilenceAlarmsColor(driver,index);//captures audio info of only the first input
+// SP.OverallAudioSilenceSettings(driver,index); //works well
+// SP.AudioSubComponentsColorsandStats(driver,index);
+// SP.OverallPADSilenceSettings(driver,index);
+// SP.padSubComponentsColorsandStats(driver,index);
+// SP.padSubComponentsColorsandStats2(driver,index);
+// SP.OverallDATASilenceSettings(driver,index);
+// SP.dataSubComponentsColorsandStats(driver,index);
+// SP.CaptureAllSilenceAlarmsColor(driver,index);
+		   	
+		
+	}}
+		
+
+	

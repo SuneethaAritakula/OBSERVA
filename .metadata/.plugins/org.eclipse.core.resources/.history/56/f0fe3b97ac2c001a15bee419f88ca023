@@ -1,0 +1,362 @@
+package com.OBSERVAMonitor;
+
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.Test;
+
+public class OBSERVASilencePageOriginal extends BaseTest {
+	
+ /*//  @Test (groups = "Regression Test")	
+
+	public void SilencePage() throws InterruptedException { 
+
+		SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+		logger.info("SilencePage launched successfully");
+
+		SP.SilencePageLeftTab();
+		Thread.sleep(1000);
+	}
+*/
+		
+	@Test (groups = "Regression Test")
+
+	public void OverallInputAlarms() throws InterruptedException {
+
+		SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+		Thread.sleep(5000);
+		SP.SilencePageLeftTab();
+		Thread.sleep(2000);
+
+		int index = 1;
+		SP.CapturingAudioPADDATAAlarmsColor(driver, index); // works well. Captures Audio, pad and data overall alarms with title for the input based on index number
+	
+		//Checking purpose 
+		//works well. Captures overall alarms of Audio, pad and Data for the input based on index number
+//		SP.captureSilenceAlarmComponents(driver, 0); 
+
+	}
+	
+	
+	@Test (groups = "Regression Test") //This method captures Inputs,alarms incl sub components for all the inputs available	
+
+	public void OverallSilenceSettings() throws InterruptedException {
+		Map<String, String> testData = excelReader.getRowFromMap("OverallSilenceSettings");
+		String value = testData.get("InputRowValue");
+
+
+		SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+		Thread.sleep(1000);
+		SP.SilencePageLeftTab();
+		/* Below method provides output for all the inputs on Silence page*/
+		SP.silencePageInputsAndAlarms(driver,testData.get("AudioVolume"),testData.get("AudioTimeOut"),
+				testData.get("PadTimeOut"),testData.get("DlsTimeOut"),testData.get("MotTimeOut"),testData.get("MOTStallTimeOUT"));
+
+	}
+	
+	@Test (groups = "Regression Test") //This method captures Inputs,alarms incl sub components for all the inputs available	
+
+	public void OverallIndividualSilenceSettings() throws InterruptedException {
+		Map<String, String> testData = excelReader.getRowFromMap("OverallIndividualSilenceSettings");
+		String value = testData.get("InputRowValue");
+		int inputRowValue=Integer.parseInt(value);
+
+		SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+		Thread.sleep(1000);
+		SP.SilencePageLeftTab();
+		/* Below methods provide output for individual inputs on Silence page 
+		 *inputRowValue provides output for individual inputs on silence page */
+		SP.OverallAudioSilenceSettings(driver,inputRowValue,testData.get("AudioVolume"),testData.get("AudioTimeOut")); 
+		AudioSubComponentAlarms(driver,i); 
+//		SP.AudioSubComponentsColorsandStats(driver,inputRowValue);//available in duplicate methods
+		;
+		SP.OverallPADSilenceSettings(driver,inputRowValue,testData.get("PadTimeOut"),testData.get("DlsTimeOut"),testData.get("MotTimeOut"));
+		PADSubComponentAlarms(driver,i)
+//		SP.padSubComponentsColorsandStats(driver,inputRowValue);//available in duplicate methods
+		SP.OverallDATASilenceSettings(driver,inputRowValue,testData.get("MOTStallTimeOUT"));
+		DATASubComponentAlarms(driver,i); 
+//		SP.dataSubComponentsColorsandStats(driver,inputRowValue);//available in duplicate methods
+	}
+		
+		
+		@Test (groups = "Regression Test")
+		
+		public void CapturingAudioPadDataAlarms() throws InterruptedException {
+			SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+			Thread.sleep(1000);
+			
+			SP.SilencePageLeftTab();
+			Map<String, String> testData = excelReader.getRowFromMap("CapturingAudioPadDataAlarms");
+			String value = testData.get("InputRowValue");
+			int inputRowValue=Integer.parseInt(value);
+
+			
+			SP.CapturingAudioPADDATAAlarmsColor(driver,inputRowValue);
+			
+			
+		}
+			
+	
+	@Test (groups = "Regression Test")	
+	public void individualAudioSilenceSettings() throws InterruptedException { // works well. reads audio settings from excel based on input row value and  verifies the alarms with the heart symbol
+//		int index = 6;
+		Map<String, String> testData = excelReader.getRowFromMap("individualAudioSilenceSettings");
+		String value = testData.get("InputRowValue");
+		int inputRowValue=Integer.parseInt(value);
+		SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+		Thread.sleep(1000);
+		SP.SilencePageLeftTab();
+		
+
+		SP.individualAudioSilenceSettings(driver,inputRowValue,testData.get("AudioVolume"),testData.get("AudioTimeOut"));
+	}
+	
+
+	@Test (groups = "Regression Test")	
+	public void individualPADSilenceSettings() throws InterruptedException { // works well. reads pad settings from excel based on input row value and  verifies the alarms with the heart symbol
+
+		Map<String, String> testData = excelReader.getRowFromMap("individualPADSilenceSettings");
+		String value = testData.get("InputRowValue");
+		int inputRowValue=Integer.parseInt(value);
+		SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+		Thread.sleep(1000);
+		SP.SilencePageLeftTab();		
+
+		SP.individualPADSilenceSettings(driver,inputRowValue,testData.get("PadTimeOut"),testData.get("DlsTimeOut"),testData.get("MotTimeOut"));
+
+
+	}
+
+	@Test(groups = "Regression Test")
+	public void individualDATASilenceSettings() throws InterruptedException { // works well. reads data settings from excel based on input row value and verifies the alarms with the heart symbol
+		
+		Map<String, String> testData = excelReader.getRowFromMap("individualDATASilenceSettings");
+		String value = testData.get("InputRowValue");
+		int inputRowValue = Integer.parseInt(value);
+		SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+		Thread.sleep(1000);
+		SP.SilencePageLeftTab();
+
+		SP.individualDATASilenceSettings(driver, inputRowValue, testData.get("MOTStallTimeOUT"));
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	@Test (groups = "integration Test") // This method works well capturing the inputs based on index number
+
+	public void subComponentAlarms() throws InterruptedException {
+
+		SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+		Thread.sleep(5000);
+		SP.SilencePageLeftTab();
+		Thread.sleep(2000);
+
+		int index = 2;
+
+		SP.AudioSubComponentAlarms(driver, index); //This method captures left and right alarms for audio services for a given input. works well
+		SP.PADSubComponentAlarms(driver, index); //This method captures left and right alarms for pad services for a given input. works well
+		SP.DATASubComponentAlarms(driver, index);//This method captures data alarm. works well
+
+
+
+	}
+
+	@Test (groups = "Regression Test")
+
+	public void SubComponentAlarms() throws InterruptedException {
+
+		SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+		Thread.sleep(1000);
+
+	//	int index = 1;
+		SP.SilencePageLeftTab();
+		
+		Map<String, String> testData = excelReader.getRowFromMap("SubComponentAlarms");
+		String value = testData.get("InputRowValue");
+		int inputRowValue=Integer.parseInt(value);
+		
+
+			SP.AudioSubComponentAlarms(driver,inputRowValue); //works well. Captures all L & R alarm colors given input service // Need to work with example of PADSubComponentAlarms method
+			SP.PADSubComponentAlarms(driver, inputRowValue);//works well. Captures DLS & MOT alarm colors
+			SP.DATASubComponentAlarms(driver, inputRowValue);//works well /// Need to work with example of PADSubComponentAlarms method
+
+
+	}
+	
+	@Test (groups = "Regression Test")
+
+	public void AudioSubComponentAlarms() throws InterruptedException {
+
+		SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+		Thread.sleep(1000);
+
+//		int index = 1;
+		SP.SilencePageLeftTab();
+		
+		Map<String, String> testData = excelReader.getRowFromMap("AudioSubComponentAlarms");
+		String value = testData.get("InputRowValue");
+		int inputRowValue=Integer.parseInt(value);
+		
+		SP.AudioSubComponentAlarms(driver,inputRowValue); //works well. Captures L & R alarm colors
+	
+	}
+	
+	
+	@Test (groups = "Regression Test")
+
+	public void padSubComponentAlarms() throws InterruptedException {
+
+		SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+		Thread.sleep(1000);
+
+//		int index = 1;
+		SP.SilencePageLeftTab();
+		
+		Map<String, String> testData = excelReader.getRowFromMap("padSubComponentAlarms");
+		String value = testData.get("InputRowValue");
+		int inputRowValue=Integer.parseInt(value);
+		
+		SP.PADSubComponentAlarms(driver, inputRowValue);//works well. Captures L & R alarm colors
+	
+	}
+	
+	@Test (groups = "Regression Test")
+
+	public void DATASubComponentAlarms() throws InterruptedException {
+
+		SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+		Thread.sleep(1000);
+
+//		int index = 1;
+		SP.SilencePageLeftTab();
+		
+		Map<String, String> testData = excelReader.getRowFromMap("DATASubComponentAlarms");
+		String value = testData.get("InputRowValue");
+		int inputRowValue=Integer.parseInt(value);
+		
+		SP.DATASubComponentAlarms(driver, inputRowValue);//works well. Captures L & R alarm colors
+	
+	}
+	
+	
+	@Test (groups = "Regression Test")
+
+	public void SubComponentLeftandRightStatsAlarmsAndText() throws InterruptedException {
+
+		SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+		Thread.sleep(1000);
+
+		//int index = 1;
+		SP.SilencePageLeftTab();
+		
+		Map<String, String> testData = excelReader.getRowFromMap("SubComponentAlarms");
+		String value = testData.get("InputRowValue");
+		int inputRowValue=Integer.parseInt(value);
+		
+		/* Below methods line numbers 70,71,72 captures Text Names with in indivivual service with in the input based on input row value*/
+		
+		SP.AudioSubComponentsLeftandRightStatsAlarmsAndText(driver, inputRowValue);//works well
+     	SP.PADSubComponentsLeftandRightStatsAlarmsAndText(driver, inputRowValue); //works well.Captures service names of pad subcomponents for 1 input at a time.
+		SP.DataSubComponentsLeftandRightStatsAlarmsAndText(driver, inputRowValue);// capturing number of inputs but not the service name
+	
+	}
+	
+	
+
+	
+	
+	@Test (groups = "Regression Test")
+
+	public void AudioSubComponentsLeftandRightStatsAlarmsAndText() throws InterruptedException {
+
+		SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+		Thread.sleep(1000);
+
+//		int index = 1;
+		SP.SilencePageLeftTab();
+		
+		Map<String, String> testData = excelReader.getRowFromMap("SubComponentAlarms");
+		String value = testData.get("InputRowValue");
+		int inputRowValue=Integer.parseInt(value);
+
+		SP.AudioSubComponentsLeftandRightStatsAlarmsAndText(driver, inputRowValue);//works well
+		
+	}
+	
+	
+	@Test (groups = "Regression Test")
+
+	public void PADSubComponentsLeftandRightStatsAlarmsAndText() throws InterruptedException {
+
+		SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+		Thread.sleep(1000);
+
+//		int index = 1;
+		SP.SilencePageLeftTab();
+		
+		Map<String, String> testData = excelReader.getRowFromMap("SubComponentAlarms");
+		String value = testData.get("InputRowValue");
+		int inputRowValue=Integer.parseInt(value);
+
+		
+		SP.PADSubComponentsLeftandRightStatsAlarmsAndText(driver, inputRowValue); //works well.Captures service names of pad subcomponents for 1 input at a time.
+
+	}
+	
+	
+	@Test (groups = "Regression Test")///works well.Captures service names of data subcomponents for 1 input at a time based on InputRowValue on excel
+
+	public void DataSubComponentsLeftandRightStatsAlarmsAndText() throws InterruptedException {
+
+		SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+		Thread.sleep(1000);
+
+//		int index = 1;
+		SP.SilencePageLeftTab();
+		
+		Map<String, String> testData = excelReader.getRowFromMap("SubComponentAlarms");
+		String value = testData.get("InputRowValue");
+		int inputRowValue=Integer.parseInt(value);
+		SP.DataSubComponentsLeftandRightStatsAlarmsAndText(driver, inputRowValue);
+		
+	}
+
+
+	
+		
+	@Test (groups = "Regression Test")
+
+	public void SubComponentsColorsandStats() throws InterruptedException {
+
+		SilencePage SP = PageFactory.initElements(driver, SilencePage.class);
+		Thread.sleep(1000);
+
+	//	int index = 1;
+		SP.SilencePageLeftTab();
+		
+		Map<String, String> testData = excelReader.getRowFromMap("SubComponentAlarms");
+		String value = testData.get("InputRowValue");
+		int inputRowValue=Integer.parseInt(value);
+		
+
+//		SP.AudioComponentsColorsV(driver, index);//works well.Only captures audio sub component alarm numbers and colours of one input at a time. No title captured but works well insilencePageInputsAndAlarms 
+		// SP.AudioSubComponentsColorsandStatsS(driver, index);//Only captures alarm colours. Names of services is not captured. Throws stale element exception
+//		 SP.AudioSubComponentsColorsandStats(driver, index); //captures overall audio alarm and number of audio services and corresponding alarms. Title is not captured. Only if thye first input is grey or else throws NullPointer exception at if(!audiocolorStatus.equals("Grey"))
+//		 SP.padSubComponentsColorsandStats(driver,index); //with sleep - null pointer exception. without sleep overallpad alarm doesn't match with individual pad alarms
+		// SP.dataSubComponentsColorsandStats(driver,index);//Only captures data sub component alarm colours of one input at a time only with thread.sleep which doesn't work well when run with overallSilenceSettings method
+	
+	}
+	}
+	
+	
+
+
+
+	

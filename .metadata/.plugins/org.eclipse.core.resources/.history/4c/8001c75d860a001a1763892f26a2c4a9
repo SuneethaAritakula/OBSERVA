@@ -1,0 +1,470 @@
+package com.OBSERVAMonitor;
+
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class ContinuityPage {
+
+	
+	String Red = "rgba(255, 54, 54, 1)";
+	   String Orange = "rgba(255, 178, 54, 1)";
+	   String Green = "rgba(24, 206, 15, 1)";
+	   String Black = "rgba(44, 44, 44, 1)";
+	   String Grey= "rgba(136, 136, 136, 1)";
+	   
+	   @FindBy(xpath = " //*[text()='Continuity']")
+	   WebElement lnkContinuity;
+	
+	// This method is used to click Silent tab on left side panel
+	   public void lnkContinuityPage() 
+			{
+				
+		   lnkContinuity.click();
+			
+			}
+	   
+	   public void Tiltes(WebDriver driver) {
+		   
+		   int i = 3;
+		   
+		   List<WebElement> TitleNames = driver.findElements(By.xpath("//*[@class= 'card-title']"));
+	       String Title =  TitleNames.get(i).getText();
+	       System.out.println(Title); 
+	   }
+	   
+	   public void CaptureAllContinuityAlarmsColor(WebDriver driver) throws InterruptedException 
+	   {
+		
+		     String Alarmcolor = null;
+		     List<WebElement> Title = driver.findElements(By.xpath("//*[@class= 'card-title']"));
+		     System.out.println("Total Inputs(alarms) on Continutiy page:"+Title.size());
+		     int Titlesize = Title.size();
+		     for(int i = 0;i<Titlesize;i++)	
+		          {
+			 
+			       String TitleName =  Title.get(i).getText();
+			       System.out.println(TitleName); 
+			       if (i<Titlesize-1) 
+			       		{
+		                  ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", Title.get(i+1));
+		                }
+        			
+		           String strHeart = driver.findElement(By.id("continuity-overall-alarm-"+i)).getAttribute("class");
+		           
+		             validateAlaramColorStatus(strHeart);
+		
+					}
+		     }
+	              
+	//The method below captures the names, alarms and current status of the 2nd input  
+	   
+	     
+	@FindBy(xpath = "//div[starts-with(@id,'continuity-card-0')]//*[@class='table']")
+	WebElement tblFirstInput;
+//	@FindBy(xpath = "')]//*[@class='table']")
+//	WebElement tblFirstInput1;
+	
+
+
+	public void tblFirstInputV(WebDriver driver, int cardNumber) throws InterruptedException {
+
+       Tiltes(driver);		
+		List<WebElement> rows = tblFirstInput.findElements(By.tagName("tr"));
+		
+
+		// System.out.println(rows.size());
+
+		for (int i = 1; i < rows.size(); i++)
+
+		{
+			// List<WebElement>cols = rows.get(i).findElements(By.tagName("td"));
+			System.out.println(" " + " " + " ");
+//			 String thHeader1="//*[@id='continuity-card-1']/div[1]/table/thead/tr/th[";
+//			 String thHeader2="]";
+
+		String Header = "//*[@id='continuity-card-3']/div[1]/table/thead";
+
+			String tdxpath3 = "//*[@id='continuity-card-3']/div[1]/table/tbody/tr[";
+			String tdxpath4 = "]/td";
+			List<WebElement> cols = driver.findElements(By.xpath(tdxpath3 + i + tdxpath4));
+			 
+
+			String header = driver.findElement(By.xpath("//*[@id='continuity-card-3']/div[1]/table/thead")).getText();
+
+			
+
+			System.out.println(header);
+
+			for (int k = 1; k <= cols.size(); k++) {
+				// String data = cols.get(k).getText();
+				String tdxpath1 = "//*[@id='continuity-card-3']/div[1]/table/tbody/tr[" + i + "]/td[";
+				String tdxpath2 = "]";
+//				String headers=driver.findElement(By.xpath(thHeader1+k+thHeader2)).getText();
+//				 System.out.println(headers+"\n");
+				String values = driver.findElement(By.xpath(tdxpath1 + k + tdxpath2)).getText();
+				if (i == 1 && k == 3) {
+//					System.out.println(" :: " + values); // Frame Rate value
+					System.out.print(frameRate(values));
+				}else if(k==1) {
+					inputStatusalarams(driver, cardNumber, i);
+				}
+
+				System.out.print( "  "+values + " ");
+//				inputStatusalarams(driver, cardNumber, i);
+			}
+//		inputStatusalarams(driver, cardNumber, i);
+			// System.out.print();
+
+		}
+	
+
+	
+}						
+					
+
+
+//this method captures current status with color and name of alarms per input basis. works well
+
+public void inputStreamStatusV(WebDriver driver,int cardNumber) throws InterruptedException
+
+{
+
+
+	String InputTitle = driver.findElement(By.xpath("//*[@class= 'card-title']")).getText();
+	System.out.println(InputTitle);
+	StringBuffer alarmcolor = new StringBuffer();
+	String alarmOverallComponentsColor = null;
+	
+
+
+	List<WebElement>rows = tblFirstInput.findElements(By.tagName("tr"));	
+	//System.out.println(rows.size());
+
+	for(int i = 1;i<rows.size();i++)
+	{
+		String cardindiviualAlarms = driver.findElement(By.xpath("//*[@id='continuity-card-"+cardNumber+"']/div[1]/table/tbody/tr["+i+"]/td/i")).getAttribute("class");
+		String cardindiviualAlarmsName = driver.findElement(By.xpath("//*[@id='continuity-card-"+cardNumber+"']/div[1]/table/tbody/tr["+i+"]/td/i")).getAttribute("name");
+
+		if (cardindiviualAlarms.contains("danger")) 
+		{
+			System.out.println(cardindiviualAlarmsName+" :: Red");
+			alarmcolor.append("Red");
+
+		}else if(cardindiviualAlarms.contains("warning")) {
+
+			System.out.println(cardindiviualAlarmsName+" :: Orange");
+			alarmcolor.append("Orange");
+
+		}
+
+		else if(cardindiviualAlarms.contains("success")) 
+		{
+
+			System.out.println(cardindiviualAlarmsName+" :: Green");
+			alarmcolor.append("Green");
+
+		}
+		else if (cardindiviualAlarms.contains("default")) 
+		{
+
+			System.out.println(cardindiviualAlarmsName+"  :: Black");
+			alarmcolor.append("Grey");
+
+		}
+	}
+
+	if (alarmcolor.indexOf("Red")!=-1)
+
+	{
+		//System.out.println("alarm is Red");
+		alarmOverallComponentsColor = "Red";
+
+
+	}else if(alarmcolor.indexOf("Orange")!=-1) {
+
+		//System.out.println("alarm is Orange");
+		alarmOverallComponentsColor = "Orange";
+
+
+	}else if(alarmcolor.indexOf("Green")!=-1) {
+
+		//System.out.println("alarm is Green");
+		alarmOverallComponentsColor = "Green";
+	}
+
+	else if (alarmcolor.indexOf("Grey")!=-1) {
+
+		//System.out.println("alarm is Grey");
+		alarmOverallComponentsColor = "Grey";
+
+	}
+
+
+	//continuity-overall-alarm-0
+	String inputHeaderValue=captureInputStreamHeaderStatus(driver,cardNumber);
+	if (inputHeaderValue.equalsIgnoreCase(alarmOverallComponentsColor))
+
+	{
+		System.out.println("One of the Alarms ("+inputHeaderValue+") Vs Overall Alarm (Heart Symbol)("+alarmOverallComponentsColor+ ")match - Pass" );
+	}
+
+	else {
+		System.out.println("One of the Alarms ("+inputHeaderValue+") Vs Overall Alarm (Heart Symbol)("+alarmOverallComponentsColor+ ") don't match - Fail" );
+
+
+	}
+
+
+}
+
+//Below method provides current status of the individual input Stream in Continuity Page
+
+public void inputStatusalarams(WebDriver driver,int cardNumber,int rowNum) throws InterruptedException
+
+{
+
+//	String InputTitle = driver.findElement(By.xpath("//*[@class= 'card-title']")).getText();
+//	System.out.println(InputTitle);
+//	StringBuffer alarmcolor = new StringBuffer();
+//	String alarmOverallComponentsColor = null;
+
+	List<WebElement>rows = tblFirstInput.findElements(By.tagName("tr"));	
+//	System.out.println(rows.size());
+
+	for(int i = 1;i<rows.size();i++)
+	{
+		String cardindiviualAlarms = driver.findElement(By.xpath("//*[@id='continuity-card-"+cardNumber+"']/div[1]/table/tbody/tr["+rowNum+"]/td/i")).getAttribute("class");
+		String cardindiviualAlarmsName = driver.findElement(By.xpath("//*[@id='continuity-card-"+cardNumber+"']/div[1]/table/tbody/tr["+rowNum+"]/td/i")).getAttribute("name");
+
+		if (cardindiviualAlarms.contains("danger")) 
+		{
+			System.out.print(cardindiviualAlarmsName+" :: Red");
+//			alarmcolor.append("Red");
+
+		}else if(cardindiviualAlarms.contains("warning")) {
+
+			System.out.print(cardindiviualAlarmsName+" :: Orange");
+//			alarmcolor.append("Orange");
+
+		}
+
+		else if(cardindiviualAlarms.contains("success")) 
+		{
+//			System.out.printf("%n");
+			System.out.print("Green");
+//			alarmcolor.append("Green");
+
+		}
+		else if (cardindiviualAlarms.contains("default")) 
+		{
+
+			System.out.print(cardindiviualAlarmsName+" :: Black");
+//			alarmcolor.append("Grey");
+
+		}
+		}
+
+
+}
+public String captureInputStreamHeaderStatus(WebDriver driver,int cardNumber) throws InterruptedException 
+{
+	System.out.println("captureInputStreamHeaderStatus Method ::");
+	     String strHeart = driver.findElement(By.id("continuity-overall-alarm-"+cardNumber)).getAttribute("class");
+	     String inputStreamHeaderStatus = validateAlaramColorStatus(strHeart);
+		return inputStreamHeaderStatus;
+}
+
+
+public String validateAlaramColorStatus(String stringValue) {
+	String status = null;
+	if (stringValue.contains("danger")) 
+	{
+		System.out.println( " Overall alarm status - Red");
+		status = "Red";
+	
+	}else if(stringValue.contains("warning")) {
+		
+		System.out.println(" Overall alarm status - Orange");
+		status = "Orange";
+
+	}
+	
+	else if(stringValue.contains("success")) 
+	{
+		
+		System.out.println(" Overall alarm status - Green");
+		status = "Green";
+		
+    }
+	else if (stringValue.contains("default")) 
+	{
+		
+		System.out.println( " Overall alarm status - Black");
+		status = "Grey";
+	}
+	return status;
+}
+
+
+public void inputStreamStatusS(WebDriver driver, int cardNumberS, int cardNumber) throws InterruptedException {
+	
+	String InputTitle = driver.findElement(By.xpath("//*[@class= 'card-title']")).getText();
+	System.out.println(InputTitle);
+	
+	StringBuffer alarmcolor = new StringBuffer();
+	String alarmOverallComponentsColor = null;
+
+	List<WebElement>rows = tblFirstInput.findElements(By.tagName("tr"));	
+	
+    System.out.println(rows.size());
+		
+		for(int i = 1;i<rows.size();i++)
+		{
+	      String Alarm = driver.findElement(By.xpath("//*[@id='continuity-card-"+cardNumberS+"']/div[1]/table/tbody/tr["+i+"]/td/i")).getAttribute("class");
+
+	if (Alarm.contains("danger")) 
+	{
+		System.out.println("Alarm :: Red");
+		alarmcolor.append("Red");
+
+	}else if(Alarm.contains("warning")) {
+		
+		System.out.println("Alarm :: Orange");
+		alarmcolor.append("Orange");
+
+	}
+
+
+	else if(Alarm.contains("success")) 
+	{
+
+	System.out.println("Alarm :: Green");
+	alarmcolor.append("Green");
+
+	}
+	else if (Alarm.contains("default")) 
+	{
+
+	System.out.println("Alarm :: Black");
+	alarmcolor.append("Grey");
+
+	}
+		}
+		
+			if (alarmcolor.indexOf("Red")!=-1)
+			 
+		{
+			//System.out.println("alarm is Red");
+				alarmOverallComponentsColor = "Red";
+				
+			
+		}else if(alarmcolor.indexOf("Orange")!=-1) {
+				
+				//System.out.println("alarm is Orange");
+			alarmOverallComponentsColor = "Orange";
+			
+		
+			}else if(alarmcolor.indexOf("Green")!=-1) {
+				
+				//System.out.println("alarm is Green");
+				alarmOverallComponentsColor = "Green";
+			}
+				
+				else if (alarmcolor.indexOf("Grey")!=-1) {
+				
+				//System.out.println("alarm is Grey");
+				alarmOverallComponentsColor = "Grey";
+					
+		         			}
+			
+			
+			 //continuity-overall-alarm-0
+			String inputHeaderValue=captureInputStreamHeaderStatus(driver,cardNumber);
+			if (inputHeaderValue.equalsIgnoreCase(alarmOverallComponentsColor))
+				
+			{
+		       System.out.println("One of the Alarms ("+inputHeaderValue+") Vs Overall Alarm (Heart Symbol)("+alarmOverallComponentsColor+ ")match - Pass" );
+			}
+
+	else {
+		       System.out.println(" One of the Alarms ("+inputHeaderValue+") Vs Overall Alarm (Heart Symbol)("+alarmOverallComponentsColor+ ")don't match - Fail" );
+		        
+		
+	     }
+	  
+
+	}
+	public String captureInputStreamHeaderStatusS(WebDriver driver,int cardNumber) throws InterruptedException 
+	{
+		System.out.println("captureInputStreamHeaderStatus Method ::");
+		//int rowValue=index-1;
+
+		     String inputStreamHeaderStatus = null;
+		     String strHeart = driver.findElement(By.id("continuity-overall-alarm-"+cardNumber)).getAttribute("class");
+		
+					if (strHeart.contains("danger")) 
+					{
+						System.out.println( " Overall alarm status - Red");
+						inputStreamHeaderStatus = "Red";
+					
+					}else if(strHeart.contains("warning")) {
+						
+						System.out.println(" Overall alarm status - Orange");
+						inputStreamHeaderStatus = "Orange";
+				
+					}
+					
+					else if(strHeart.contains("success")) 
+					{
+						
+						System.out.println(" Overall alarm status - Green");
+						inputStreamHeaderStatus = "Green";
+						
+		            }
+					else if (strHeart.contains("default")) 
+					{
+						
+						System.out.println( " Overall alarm status - Black");
+						inputStreamHeaderStatus = "Grey";
+					}
+					return inputStreamHeaderStatus;
+	
+	
+
+	
+	
+	
+}
+public boolean frameRate(String frameRatevalue)
+{
+      boolean frameRateStatus;
+      if(frameRatevalue.equalsIgnoreCase("41.00")||frameRatevalue.equalsIgnoreCase("42.50")) {
+    	  frameRateStatus=true;
+      }
+      else {
+	frameRateStatus=frameRatevalue.matches("41+([.][0-9]+)?|42+([.][0-4][0-9]+)?");
+//	 System.out.print("Frame Rate Value is between 41.00 and 42.5::"          + frameRatevalue.matches("41+([.][0-9]+)?|42+([.][0-4][0-9]+)"));
+      }
+	return frameRateStatus;
+	
+	}
+
+	
+} 
+
+/*public static void main(String s[]) {
+	String input = "42.50";
+	//System.out.println(input.matches("([0-5][,.]+\\d+(;|$)|[1-6](;|$))"+"\\d$"));
+//	System.out.println(input.matches("41+([.][0-9]+)?|42+([.][0-4][0-9]+)?"));
+	System.out.println(frameRate("41.51"));
+}
+		          
+}	          
+*/		          
+		      

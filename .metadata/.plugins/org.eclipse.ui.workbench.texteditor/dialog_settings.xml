@@ -2,24 +2,41 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="AudioSubComponentsColorsandStats" key="selection"/>
+		<item value="" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
-		<item value="true" key="wrap"/>
+		<item value="false" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="OverallInputAlarms"/>
-			<item value="overallInput"/>
-			<item value="AlarmComponentscolor"/>
+			<item value="framerate-alarm"/>
+			<item value="framerate-alarm ::"/>
+			<item value="OverallIndividualSilenceSettings"/>
+			<item value="silencePageInputsAndAlarms"/>
+			<item value="Alarm color ::"/>
+			<item value="OAlarm color ::"/>
+			<item value="OverallDATAAlarm color ::"/>
+			<item value="OverallDATASilenceSettings Method ::"/>
+			<item value="colorValue"/>
+			<item value="Utility"/>
+			<item value="utility"/>
+			<item value="capture"/>
+			<item value="CaptureAllSilenceAlarmsColor Method ::"/>
+			<item value="individualPADSilenceSettings"/>
+			<item value="&#x09;&#x09;&#x09;if(!datacolorStatus.equals(&quot;Grey&quot;)) {"/>
 		</list>
 		<list key="replacehistory">
+			<item value="k"/>
+			<item value="PADSubComponent"/>
+			<item value="SourceType"/>
+			<item value="sourceType"/>
+			<item value=""/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="284" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="391" key="DIALOG_HEIGHT"/>
-		<item value="666" key="DIALOG_X_ORIGIN"/>
-		<item value="178" key="DIALOG_Y_ORIGIN"/>
+		<item value="1304" key="DIALOG_X_ORIGIN"/>
+		<item value="211" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

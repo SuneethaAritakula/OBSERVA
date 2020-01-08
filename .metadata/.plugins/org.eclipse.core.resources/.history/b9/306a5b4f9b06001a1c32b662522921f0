@@ -1,0 +1,79 @@
+package com.OBSERVAMonitor;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.Test;
+
+public class OBSERVAContinuityPage extends BaseTest{
+	@Test
+	public void ContinuityPage() throws InterruptedException {
+		
+	int continuityCardNum = 0;
+	
+	ContinuityPage CP = PageFactory.initElements(driver, ContinuityPage.class);
+	CP.lnkContinuityPage();
+	Thread.sleep(5000);
+//CP.CaptureAllContinuityAlarmsColor(driver);
+//	Thread.sleep(5000);
+	//CP.tblFirstInputV(driver);
+	CP.inputStreamStatusV(driver,continuityCardNum);
+//	CP.inputStreamStatusS(driver,continuityCardNum, continuityCardNum);
+//	CP.tblFirstInputS(driver);
+//	CP.frameRate("'42.5");
+}}
+
+//div[@class='col-3'][1]//*[@class='btn btn-default btn-fab btn-icon btn-round btn-configedit-overall pull-right']//i[@class='fas fa-cog']//div[contains(., 'All')][2]
+
+//section[@id='mysection']/descendant::a[2]
+public void CaptureAllContinuityAlarmsColor(WebDriver driver) throws InterruptedException 
+{
+	
+	     String Alarmcolor = null;
+	     List<WebElement> Title = driver.findElements(By.xpath("//*[@class= 'card-title']"));
+	     System.out.println("Total Inputs(alarms) on Continutiy page:"+Title.size());
+	     int Titlesize = Title.size();
+	     for(int i = 0;i<Titlesize;i++)	
+	          {
+		 
+		       String TitleName =  Title.get(i).getText();
+		       System.out.println(TitleName); 
+		       if (i<Titlesize-1) 
+		       		{
+	                  ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", Title.get(i+1));
+	                }
+ 			
+	           String strHeart = driver.findElement(By.id("continuity-overall-alarm-"+i)).getAttribute("class");
+	
+				if (strHeart.contains("danger")) 
+				{
+					System.out.println(TitleName + " Overall alarm status - Red");
+					Alarmcolor = "Red";
+				
+				}else if(strHeart.contains("warning")) {
+					
+					System.out.println(TitleName+ " Overall alarm status - Orange");
+					Alarmcolor = "Orange";
+			
+				}
+	          
+			
+			else if(strHeart.contains("success")) 
+			{
+				
+				System.out.println(TitleName +" Overall alarm status - Green");
+				Alarmcolor = "Green";
+				
+         }
+			else if (strHeart.contains("default")) 
+			{
+				
+				System.out.println(TitleName + " Overall alarm status - Black");
+				Alarmcolor = "Grey";
+						
+			}}}
+           
